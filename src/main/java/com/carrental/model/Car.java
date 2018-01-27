@@ -1,5 +1,7 @@
 package com.carrental.model;
 
+import org.springframework.beans.BeanUtils;
+
 import java.util.Objects;
 
 import javax.persistence.Entity;
@@ -39,6 +41,12 @@ public class Car {
 
   public void setType(String type) {
     this.type = type;
+  }
+
+  public Car getCopy() {
+    Car copy = new Car();
+    BeanUtils.copyProperties(this, copy);
+    return copy;
   }
 
   @Override
