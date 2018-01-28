@@ -1,5 +1,7 @@
 package com.carrental.model;
 
+import org.springframework.beans.BeanUtils;
+
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -38,6 +40,11 @@ public class Contact {
   public Contact(String name, String phone, String email) {
     this(name, phone);
     this.email = email;
+  }
+
+  public Contact(Contact another) {
+    this();
+    BeanUtils.copyProperties(another, this);
   }
 
   public long getId() {
