@@ -1,19 +1,19 @@
 package com.carrental.repository;
 
 import com.carrental.model.Car;
-import com.carrental.model.Maintanance;
-import com.carrental.model.Maintanance.MaintenanceStatus;
+import com.carrental.model.Maintenance;
+import com.carrental.model.Maintenance.MaintenanceStatus;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface MaintenanceRepository extends JpaRepository<Maintanance, Long> {
+public interface MaintenanceRepository extends JpaRepository<Maintenance, Long> {
 
-  List<Maintanance> findAllByCar(Car car);
+  List<Maintenance> findAllByCar(Car car);
 
-  List<Maintanance> findAllByCarAndStatus(Car car, MaintenanceStatus status);
+  List<Maintenance> findAllByCarAndStatus(Car car, MaintenanceStatus status);
 
-  List<Maintanance> findAllByStatus(MaintenanceStatus status);
+  List<Maintenance> findAllByStatus(MaintenanceStatus status);
 
 }

@@ -1,5 +1,7 @@
 package com.carrental.model;
 
+import org.springframework.beans.BeanUtils;
+
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -9,7 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Maintanance {
+public class Maintenance {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,16 +25,21 @@ public class Maintanance {
 
   private Car car;
 
-  public Maintanance() {
+  public Maintenance() {
   }
 
-  public Maintanance(Car car) {
+  public Maintenance(Car car) {
     this.car = car;
   }
 
-  public Maintanance(Car car, MaintenanceStatus status) {
+  public Maintenance(Car car, MaintenanceStatus status) {
     this(car);
     this.status = status;
+  }
+
+  public Maintenance(Maintenance another) {
+    this();
+    BeanUtils.copyProperties(another, this);
   }
 
   public long getId() {
@@ -84,7 +91,7 @@ public class Maintanance {
       return false;
     }
 
-    Maintanance that = (Maintanance) obj;
+    Maintenance that = (Maintenance) obj;
 
     return Objects.equals(this.car, that.car)
         && Objects.equals(this.dateDone, that.dateDone)
@@ -98,7 +105,7 @@ public class Maintanance {
 
   @Override
   public String toString() {
-    return "Maintanance{"
+    return "Maintenance{"
         + "id=" + id
         + ", status=" + status
         + ", dateDone=" + dateDone
