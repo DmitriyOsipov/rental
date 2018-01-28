@@ -33,7 +33,7 @@ public class CarService {
 
   public boolean deleteCar(Long id) {
     repository.delete(id);
-    return repository.exists(id);
+    return !repository.exists(id);
   }
 
   public Car getCar(Long id) throws CarException {

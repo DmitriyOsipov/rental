@@ -121,4 +121,8 @@ public class Contact {
         + ", note='" + note + '\''
         + '}';
   }
+
+  public String getContactInfo() {
+    return name.concat(" ").concat(phone);
+  }
 }
