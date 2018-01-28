@@ -20,11 +20,14 @@ public class Car {
 
   private String type;
 
+  private int mileage;
+
   public Car() {
   }
 
-  public Car(String type) {
+  public Car(String type, int mileage) {
     this.type = type;
+    this.mileage = mileage;
   }
 
   public long getId() {
@@ -41,6 +44,14 @@ public class Car {
 
   public void setType(String type) {
     this.type = type;
+  }
+
+  public int getMileage() {
+    return mileage;
+  }
+
+  public void setMileage(int mileage) {
+    this.mileage = mileage;
   }
 
   public Car getCopy() {
@@ -60,12 +71,13 @@ public class Car {
 
     Car that = (Car) obj;
 
-    return Objects.equals(this.type, that.type);
+    return Objects.equals(this.type, that.type)
+        && Objects.equals(this.mileage, that.mileage);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(type);
+    return Objects.hash(type, mileage);
   }
 
   @Override
@@ -73,6 +85,7 @@ public class Car {
     return "Car{"
         + "id=" + id
         + ", type='" + type + '\''
+        + ", mileage=" + mileage
         + '}';
   }
 }

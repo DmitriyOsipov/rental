@@ -8,6 +8,8 @@ import com.carrental.repository.CarRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.List;
+
 public class CarService {
 
   @Autowired
@@ -30,5 +32,25 @@ public class CarService {
   public boolean deleteCar(Long id) {
     repository.delete(id);
     return repository.exists(id);
+  }
+
+  public Car getCar(Long id) throws CarException {
+    Car car = repository.findOne(id);
+    if (car == null) {
+      throw new CarNotFoundException();
+    }
+    return car;
+  }
+
+  public List<Car> getAllCars() {
+    return repository.findAll();
+  }
+
+  public List<Car> getAllCars(String type) {
+    return repository.findAllByTypeLike(type);
+  }
+
+  public List<Car> getAllCars(int mileage, int range) {
+    return repository.findAllByMileageBetween(mileage - range, mileage + range);
   }
 }
