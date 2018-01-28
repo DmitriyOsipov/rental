@@ -1,5 +1,7 @@
 package com.carrental.model;
 
+import org.springframework.beans.BeanUtils;
+
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -55,6 +57,11 @@ public class Rental {
       LocalDate endDate) {
     this(car, price, startDate, endDate);
     this.contactInfo = contactInfo;
+  }
+
+  public Rental(Rental another) {
+    this();
+    BeanUtils.copyProperties(another, this);
   }
 
   public long getId() {

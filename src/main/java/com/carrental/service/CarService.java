@@ -21,14 +21,14 @@ public class CarService {
     if (repository.exists(newCar.getId())) {
       throw new CarAlreadyExistsException();
     }
-    return repository.save(newCar).getCopy();
+    return new Car(repository.save(newCar));
   }
 
   public Car updateCar(Car updated) throws CarException {
     if (!repository.exists(updated.getId())) {
       throw new CarNotFoundException();
     }
-    return repository.save(updated).getCopy();
+    return new Car(repository.save(updated));
   }
 
   public boolean deleteCar(Long id) {

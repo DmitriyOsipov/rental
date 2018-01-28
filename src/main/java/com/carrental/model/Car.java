@@ -30,6 +30,11 @@ public class Car {
     this.mileage = mileage;
   }
 
+  public Car(Car another) {
+    this();
+    BeanUtils.copyProperties(another, this);
+  }
+
   public long getId() {
     return id;
   }
@@ -52,12 +57,6 @@ public class Car {
 
   public void setMileage(int mileage) {
     this.mileage = mileage;
-  }
-
-  public Car getCopy() {
-    Car copy = new Car();
-    BeanUtils.copyProperties(this, copy);
-    return copy;
   }
 
   @Override
