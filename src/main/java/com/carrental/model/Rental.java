@@ -37,25 +37,30 @@ public class Rental {
 
   private LocalDate endDate;
 
+  private int startMileage;
+
+  private int endMileage;
+
   public Rental() {
   }
 
-  private Rental(Car car, double price, LocalDate startDate, LocalDate endDate) {
+  private Rental(Car car, double price, LocalDate startDate, LocalDate endDate, int startMileage) {
     this.car = car;
     this.price = price;
     this.startDate = startDate;
     this.endDate = endDate;
+    this.startMileage = startMileage;
   }
 
   public Rental(Car car, Contact client, double price, LocalDate startDate,
-      LocalDate endDate) {
-    this(car, price, startDate, endDate);
+      LocalDate endDate, int startMileage) {
+    this(car, price, startDate, endDate, startMileage);
     this.client = client;
   }
 
   public Rental(Car car, String contactInfo, double price, LocalDate startDate,
-      LocalDate endDate) {
-    this(car, price, startDate, endDate);
+      LocalDate endDate, int startMileage) {
+    this(car, price, startDate, endDate, startMileage);
     this.contactInfo = contactInfo;
   }
 
@@ -120,6 +125,22 @@ public class Rental {
     this.endDate = endDate;
   }
 
+  public int getStartMileage() {
+    return startMileage;
+  }
+
+  public void setStartMileage(int startMileage) {
+    this.startMileage = startMileage;
+  }
+
+  public int getEndMileage() {
+    return endMileage;
+  }
+
+  public void setEndMileage(int endMileage) {
+    this.endMileage = endMileage;
+  }
+
   @Override
   public boolean equals(Object obj) {
     if (this == obj) {
@@ -135,12 +156,13 @@ public class Rental {
         && Objects.equals(this.client, that.client)
         && Objects.equals(this.contactInfo, that.contactInfo)
         && Objects.equals(this.startDate, that.startDate)
-        && Objects.equals(this.endDate, that.endDate);
+        && Objects.equals(this.endDate, that.endDate)
+        && Objects.equals(this.startMileage, that.startMileage);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(car, client, contactInfo, startDate, endDate);
+    return Objects.hash(car, client, contactInfo, startDate, endDate, startMileage);
   }
 
   @Override

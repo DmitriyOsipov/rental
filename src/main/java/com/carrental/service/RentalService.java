@@ -73,4 +73,16 @@ public class RentalService {
     });
     return rentalRepository.save(rentalList);
   }
+
+  public Rental closeRental(long id, int endMileage) throws RentalException {
+    Rental rental = rentalRepository.findOne(id);
+    if (rental == null) {
+      throw new RentalNotFoundException();
+    }
+    if (rental.getStartMileage() <= endMileage) {
+      throw new RentalException("Wrong end mileage value!");
+    }
+    rental.setEndMileage(endMileage);
+    return new Rental(rentalRepository.save(rental));
+  }
 }
