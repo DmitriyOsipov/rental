@@ -2,7 +2,7 @@ package com.carrental.service;
 
 import com.carrental.exception.MaintenanceAlreadyExistsException;
 import com.carrental.exception.MaintenanceException;
-import com.carrental.exception.MaintenanceIllegalException;
+import com.carrental.exception.MaintenanceInvalidException;
 import com.carrental.exception.MaintenanceNotFoundException;
 import com.carrental.model.Car;
 import com.carrental.model.Maintenance;
@@ -26,7 +26,7 @@ public class MaintenanceService {
     }
     List<Maintenance> carMaintenances = this.getAll(newMaintenance.getCar());
     if (carMaintenances.stream().anyMatch(obj -> obj.getStatus() != MaintenanceStatus.DONE)) {
-      throw new MaintenanceIllegalException("There is some undone maintenance for this car!");
+      throw new MaintenanceInvalidException("There is some undone maintenance for this car!");
     }
     return new Maintenance(repository.save(newMaintenance));
   }
