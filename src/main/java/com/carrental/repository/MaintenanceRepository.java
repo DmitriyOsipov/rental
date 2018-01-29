@@ -16,4 +16,5 @@ public interface MaintenanceRepository extends JpaRepository<Maintenance, Long> 
 
   List<Maintenance> findAllByStatus(MaintenanceStatus status);
 
+  List<Maintenance> findAllByStatusIsNot(MaintenanceStatus status);
 }

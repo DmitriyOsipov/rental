@@ -1,5 +1,6 @@
 package com.carrental.model;
 
+import javax.persistence.Column;
 import org.springframework.beans.BeanUtils;
 
 import java.time.LocalDate;
@@ -19,14 +20,19 @@ public class Contact {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
 
+  @Column(name = "name")
   private String name;
 
+  @Column(name = "phone")
   private String phone;
 
+  @Column(name = "email")
   private String email;
 
+  @Column(name = "birthday")
   private LocalDate birthday;
 
+  @Column(name = "note")
   private String note;
 
   public Contact() {

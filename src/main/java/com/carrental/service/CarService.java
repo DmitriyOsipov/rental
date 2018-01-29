@@ -4,8 +4,11 @@ import com.carrental.exception.CarAlreadyExistsException;
 import com.carrental.exception.CarException;
 import com.carrental.exception.CarNotFoundException;
 import com.carrental.model.Car;
+import com.carrental.model.Maintenance;
+import com.carrental.model.Rental;
 import com.carrental.repository.CarRepository;
 
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +19,12 @@ public class CarService {
 
   @Autowired
   private CarRepository repository;
+
+  @Autowired
+  private MaintenanceService maintenanceService;
+
+  @Autowired
+  private RentalService rentalService;
 
   public Car addCar(Car newCar) throws CarException {
     if (repository.exists(newCar.getId())) {
@@ -54,5 +63,14 @@ public class CarService {
 
   public List<Car> getAllCars(int mileage, int range) {
     return repository.findAllByMileageBetween(mileage - range, mileage + range);
+  }
+
+  public List<Car> getFreeCars() {
+    List<Car> allCars = this.getAllCars();
+    allCars.removeAll(maintenanceService.getAllUnfinished()
+        .stream().map(Maintenance::getCar).collect(Collectors.toList()));
+    allCars.removeAll(rentalService.getCurrentRentals()
+        .stream().map(Rental::getCar).collect(Collectors.toList()));
+    return allCars;
   }
 }

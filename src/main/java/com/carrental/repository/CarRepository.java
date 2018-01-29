@@ -11,4 +11,5 @@ public interface CarRepository extends JpaRepository<Car, Long> {
   List<Car> findAllByTypeLike(String type);
 
   List<Car> findAllByMileageBetween(int start, int end);
+
 }

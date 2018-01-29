@@ -1,5 +1,6 @@
 package com.carrental.model;
 
+import javax.persistence.Column;
 import org.springframework.beans.BeanUtils;
 
 import java.util.Objects;
@@ -18,10 +19,13 @@ public class Car {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
 
+  @Column(name = "car_type")
   private String type;
 
+  @Column(name = "mileage", columnDefinition = "INT DEFAULT 0")
   private int mileage;
 
+  @Column(name = "last_maintenance", columnDefinition = "INT DEFAULT 0")
   private int lastMaintenance;
 
   public Car() {

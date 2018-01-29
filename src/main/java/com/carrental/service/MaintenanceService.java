@@ -59,6 +59,10 @@ public class MaintenanceService {
     return repository.findAllByCarAndStatus(car, status);
   }
 
+  public List<Maintenance> getAllUnfinished() {
+    return repository.findAllByStatusIsNot(MaintenanceStatus.DONE);
+  }
+
   public boolean hasUnfinishedMaintenance(Car car) {
     return this.getAll(car).stream().anyMatch(obj -> obj.getStatus() != MaintenanceStatus.DONE);
   }

@@ -118,7 +118,6 @@ public class Maintenance {
 
   public enum MaintenanceStatus {
     SCHEDULED,
-    ON_REQUEST,
     IN_PROGRESS,
     DONE;
   }
