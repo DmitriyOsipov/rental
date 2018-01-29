@@ -9,6 +9,7 @@ import com.carrental.model.Maintenance;
 import com.carrental.model.Maintenance.MaintenanceStatus;
 import com.carrental.repository.MaintenanceRepository;
 
+import java.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,8 +25,7 @@ public class MaintenanceService {
     if (repository.exists(newMaintenance.getId())) {
       throw new MaintenanceAlreadyExistsException();
     }
-    List<Maintenance> carMaintenances = this.getAll(newMaintenance.getCar());
-    if (carMaintenances.stream().anyMatch(obj -> obj.getStatus() != MaintenanceStatus.DONE)) {
+    if (hasUnfinishedMaintenance(newMaintenance.getCar())) {
       throw new MaintenanceInvalidException("There is some undone maintenance for this car!");
     }
     return new Maintenance(repository.save(newMaintenance));
@@ -57,5 +57,28 @@ public class MaintenanceService {
 
   public List<Maintenance> getAll(Car car, MaintenanceStatus status) {
     return repository.findAllByCarAndStatus(car, status);
+  }
+
+  public boolean hasUnfinishedMaintenance(Car car) {
+    return this.getAll(car).stream().anyMatch(obj -> obj.getStatus() != MaintenanceStatus.DONE);
+  }
+
+  public Maintenance get(long id) throws MaintenanceException {
+    Maintenance inDb = repository.findOne(id);
+    if (inDb == null) {
+      throw new MaintenanceNotFoundException();
+    }
+    return new Maintenance(inDb);
+  }
+
+  public Maintenance closeMaintenance(long id, double cost) throws MaintenanceException {
+    Maintenance toClose = this.get(id);
+    if (toClose.getStatus() == MaintenanceStatus.DONE) {
+      throw new MaintenanceInvalidException("This maintenance is already closed");
+    }
+    toClose.setCost(cost);
+    toClose.setDateDone(LocalDate.now());
+    toClose.setStatus(MaintenanceStatus.DONE);
+    return this.update(toClose);
   }
 }

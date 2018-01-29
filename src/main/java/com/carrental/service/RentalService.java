@@ -2,6 +2,7 @@ package com.carrental.service;
 
 import com.carrental.exception.RentalAlreadyExistsException;
 import com.carrental.exception.RentalException;
+import com.carrental.exception.RentalInvalidException;
 import com.carrental.exception.RentalNotFoundException;
 import com.carrental.model.Car;
 import com.carrental.model.Contact;
@@ -20,9 +21,16 @@ public class RentalService {
   @Autowired
   private RentalRepository rentalRepository;
 
+  @Autowired
+  private MaintenanceService maintenanceService;
+
   public Rental addRental(Rental newRental) throws RentalException {
     if (rentalRepository.exists(newRental.getId())) {
       throw new RentalAlreadyExistsException();
+    }
+    newRental.setEndMileage(0);
+    if (maintenanceService.hasUnfinishedMaintenance(newRental.getCar())) {
+      throw new RentalInvalidException("This car is under maintenance!");
     }
     return new Rental(rentalRepository.save(newRental));
   }
