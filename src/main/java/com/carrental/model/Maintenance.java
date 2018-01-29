@@ -26,9 +26,11 @@ public class Maintenance {
   private Car car;
 
   public Maintenance() {
+    this.status = MaintenanceStatus.SCHEDULED;
   }
 
   public Maintenance(Car car) {
+    this();
     this.car = car;
   }
 
