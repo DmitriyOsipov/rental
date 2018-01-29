@@ -22,12 +22,19 @@ public class Car {
 
   private int mileage;
 
+  private int lastMaintenance;
+
   public Car() {
   }
 
   public Car(String type, int mileage) {
     this.type = type;
     this.mileage = mileage;
+  }
+
+  public Car(String type, int mileage, int lastMaintenance) {
+    this(type, mileage);
+    this.lastMaintenance = lastMaintenance;
   }
 
   public Car(Car another) {
@@ -59,6 +66,14 @@ public class Car {
     this.mileage = mileage;
   }
 
+  public int getLastMaintenance() {
+    return lastMaintenance;
+  }
+
+  public void setLastMaintenance(int lastMaintenance) {
+    this.lastMaintenance = lastMaintenance;
+  }
+
   @Override
   public boolean equals(Object obj) {
     if (this == obj) {
@@ -71,12 +86,13 @@ public class Car {
     Car that = (Car) obj;
 
     return Objects.equals(this.type, that.type)
-        && Objects.equals(this.mileage, that.mileage);
+        && Objects.equals(this.mileage, that.mileage)
+        && Objects.equals(this.lastMaintenance, that.lastMaintenance);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(type, mileage);
+    return Objects.hash(type, mileage, lastMaintenance);
   }
 
   @Override

@@ -1,5 +1,6 @@
 package com.carrental.service;
 
+import com.carrental.event.RentalClosedEvent;
 import com.carrental.exception.RentalAlreadyExistsException;
 import com.carrental.exception.RentalException;
 import com.carrental.exception.RentalInvalidException;
@@ -10,6 +11,7 @@ import com.carrental.model.Rental;
 import com.carrental.repository.RentalRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -23,6 +25,9 @@ public class RentalService {
 
   @Autowired
   private MaintenanceService maintenanceService;
+
+  @Autowired
+  private ApplicationEventPublisher publisher;
 
   public Rental addRental(Rental newRental) throws RentalException {
     if (rentalRepository.exists(newRental.getId())) {
@@ -91,6 +96,8 @@ public class RentalService {
       throw new RentalException("Wrong end mileage value!");
     }
     rental.setEndMileage(endMileage);
-    return new Rental(rentalRepository.save(rental));
+    Rental closed = new Rental(rentalRepository.save(rental));
+    publisher.publishEvent(new RentalClosedEvent(closed.getCar(), endMileage));
+    return closed;
   }
 }

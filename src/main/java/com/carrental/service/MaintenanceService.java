@@ -9,10 +9,10 @@ import com.carrental.model.Maintenance;
 import com.carrental.model.Maintenance.MaintenanceStatus;
 import com.carrental.repository.MaintenanceRepository;
 
-import java.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
