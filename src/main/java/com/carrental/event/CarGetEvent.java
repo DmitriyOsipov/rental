@@ -1,22 +1,23 @@
 package com.carrental.event;
 
+import com.carrental.domain.Response;
 import com.carrental.model.Car;
+
 import org.springframework.context.ApplicationEvent;
-import org.springframework.ui.Model;
 
 public class CarGetEvent extends ApplicationEvent {
 
-  private Model model;
+  private Response response;
   private Car car;
 
-  public CarGetEvent(Model model, Car car) {
+  public CarGetEvent(Response response, Car car) {
     super(car);
-    this.model = model;
+    this.response = response;
     this.car = car;
   }
 
-  public Model getModel() {
-    return model;
+  public Response getResponse() {
+    return response;
   }
 
   public Car getCar() {

@@ -13,6 +13,11 @@ public class Response extends HashMap<ResponseKeys, Object> {
     this.put(key, value);
   }
 
+  public Response(ResponseKeys key, Object value) {
+    this();
+    this.put(key, value);
+  }
+
   public Response(Status status) {
     super();
     this.put(ResponseKeys.STATUS, status);

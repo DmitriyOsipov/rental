@@ -1,5 +1,7 @@
 package com.carrental.controller;
 
+import com.carrental.domain.Response;
+import com.carrental.domain.ResponseKeys;
 import com.carrental.event.CarGetEvent;
 import com.carrental.exception.CarException;
 import com.carrental.model.Car;
@@ -24,15 +26,17 @@ public class CarController {
 
   @RequestMapping(method = RequestMethod.GET)
   public String getAll(Model model) {
-    model.addAttribute("carsList", carService.getAllCars());
+    Response response = new Response();
+    response.put(ResponseKeys.CAR_LIST, carService.getAllCars());
+    model.addAttribute("response", response);
     return "cars";
   }
 
   @RequestMapping("/{id}")
   public String getCar(Model model, @PathVariable long id) throws CarException {
     Car car = carService.getCar(id);
-    model.addAttribute("car", car);
-    publisher.publishEvent(new CarGetEvent(model, car));
+    Response response = new Response(ResponseKeys.CAR, car);
+    publisher.publishEvent(new CarGetEvent(response, car));
     return "cars/".concat(String.valueOf(id));
   }
 }

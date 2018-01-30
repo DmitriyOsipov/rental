@@ -1,12 +1,14 @@
 package com.carrental.event;
 
-import com.carrental.exception.MaintenanceException;
-import com.carrental.exception.RentalException;
+import com.carrental.domain.ResponseKeys;
 import com.carrental.service.MaintenanceService;
 import com.carrental.service.RentalService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.EventListener;
+import org.springframework.stereotype.Component;
 
+@Component
 public class CarGetListener {
 
   @Autowired
@@ -16,9 +18,10 @@ public class CarGetListener {
   private RentalService rentalService;
 
   @EventListener
-  public void handleCarGetEvent(CarGetEvent event) throws MaintenanceException, RentalException {
-    event.getModel().addAttribute("rentals", rentalService.getCarRentals(event.getCar()));
-    event.getModel().addAttribute("maintenances", maintenanceService.getAll(event.getCar()));
+  public void handleCarGetEvent(CarGetEvent event) {
+    event.getResponse().put(ResponseKeys.RENTAL_LIST, rentalService.getCarRentals(event.getCar()));
+    event.getResponse()
+        .put(ResponseKeys.MAINTENANCE_LIST, maintenanceService.getAll(event.getCar()));
   }
 
 }
