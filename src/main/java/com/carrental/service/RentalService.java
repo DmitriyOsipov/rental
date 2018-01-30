@@ -52,6 +52,14 @@ public class RentalService {
     return !rentalRepository.exists(id);
   }
 
+  public Rental getRental(long id) throws RentalException {
+    Rental gotOne = rentalRepository.findOne(id);
+    if (gotOne == null) {
+      throw new RentalNotFoundException();
+    }
+    return gotOne;
+  }
+
   public List<Rental> getCurrentRentals() {
     return rentalRepository
         .findAllByStartDateBeforeAndEndDateAfter(LocalDate.now(), LocalDate.now());
