@@ -4,6 +4,7 @@ import org.springframework.beans.BeanUtils;
 
 import java.time.LocalDate;
 import java.util.Objects;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -28,16 +29,21 @@ public class Rental {
   @JoinColumn(name = "client_id")
   private Contact client;
 
+  @Column(name = "contact_info")
   private String contactInfo;
 
   private double price;
 
+  @Column(name = "start_date")
   private LocalDate startDate;
 
+  @Column(name = "end_date")
   private LocalDate endDate;
 
+  @Column(name = "start_mileage")
   private int startMileage;
 
+  @Column(name = "end_mileage")
   private int endMileage;
 
   public Rental() {
