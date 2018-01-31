@@ -30,8 +30,8 @@ public class CarController {
   public String getAll(Model model) {
     Response response = new Response();
     response.put(ResponseKeys.CAR_LIST, carService.getAllCars());
-    model.addAttribute("response", response);
-    return "cars";
+    model.addAttribute("result", response);
+    return "cars_page";
   }
 
   @RequestMapping("/{id}")
@@ -39,27 +39,27 @@ public class CarController {
     Car car = carService.getCar(id);
     Response response = new Response(ResponseKeys.CAR, car);
     publisher.publishEvent(new CarGetEvent(response, car));
-    model.addAttribute("response", response);
+    model.addAttribute("result", response);
     return "cars/".concat(String.valueOf(id));
   }
 
   @RequestMapping(value = "/new", method = RequestMethod.POST)
   public String addNew(Model model, @RequestBody Car car) throws CarException {
     Car added = carService.addCar(car);
-    model.addAttribute("response", new Response(ResponseKeys.CAR, added));
+    model.addAttribute("result", new Response(ResponseKeys.CAR, added));
     return "cars/".concat(String.valueOf(added.getId()));
   }
 
   @RequestMapping(value = "/update", method = RequestMethod.PUT)
   public String update(Model model, @RequestBody Car car) throws CarException {
     Car updated = carService.updateCar(car);
-    model.addAttribute("response", new Response(ResponseKeys.CAR, updated));
+    model.addAttribute("result", new Response(ResponseKeys.CAR, updated));
     return "cars/".concat(String.valueOf(updated.getId()));
   }
 
   @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
   public String delete(Model model, @PathVariable long id) throws CarException {
-    model.addAttribute("response",
+    model.addAttribute("result",
         new Response(ResponseKeys.CAR_DELETED, carService.deleteCar(id)));
     return "cars";
   }
