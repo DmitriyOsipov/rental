@@ -1,23 +1,23 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-
-    pageEncoding="UTF-8"%>
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-
-<html>
-
+﻿<html>
 <head>
-
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
-<title>Test: hello</title>
-
+    <title>Cars rentals</title>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <style>
+        <%@include file='stylesheet.css' %>
+    </style>
+    <meta http-equiv="Content-Type" content="text/html" ; charset="utf-8">
 </head>
-
 <body>
 
-	<h1>Hello, world</h1>
+<div class="grid-container">
+    <%@ include file="template-static-import.jsp" %>
 
+    <section class="mainSect">
+        <p class="itemGreet">
+            <%@ include file="greetings.txt" %>
+        </p>
+    </section>
+
+</div>
 </body>
-
 </html>
