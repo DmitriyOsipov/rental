@@ -4,11 +4,16 @@ CREATE TABLE accounts
     PRIMARY KEY,
   login    VARCHAR(45)                 NOT NULL,
   password VARCHAR(45)                 NOT NULL,
-  role     VARCHAR(25) DEFAULT 'admin' NOT NULL,
-  CONSTRAINT login_UNIQUE
-  UNIQUE (login)
+  role     VARCHAR(25) DEFAULT 'admin' NOT NULL
 )
-  ENGINE = InnoDB, DEFAULT CHARSET = utf8;
+  ENGINE = InnoDB;
+
+CREATE UNIQUE INDEX login_UNIQUE
+  ON accounts (login);
+
+ALTER TABLE accounts
+  ADD CONSTRAINT login_UNIQUE
+UNIQUE (login);
 
 CREATE TABLE cars
 (
@@ -18,7 +23,7 @@ CREATE TABLE cars
   mileage          INT DEFAULT '0' NULL,
   last_maintenance INT DEFAULT '0' NULL
 )
-  ENGINE = InnoDB, DEFAULT CHARSET = utf8;
+  ENGINE = InnoDB;
 
 CREATE TABLE contacts
 (
@@ -30,7 +35,7 @@ CREATE TABLE contacts
   birthday DATE         NULL,
   note     VARCHAR(255) NULL
 )
-  ENGINE = InnoDB, DEFAULT CHARSET = utf8;
+  ENGINE = InnoDB;
 
 CREATE TABLE maintenances
 (
@@ -41,7 +46,7 @@ CREATE TABLE maintenances
   cost      DOUBLE DEFAULT '0' NOT NULL,
   car_id    BIGINT             NOT NULL
 )
-  ENGINE = InnoDB, DEFAULT CHARSET = utf8;
+  ENGINE = InnoDB;
 
 CREATE TABLE rentals
 (
@@ -54,17 +59,21 @@ CREATE TABLE rentals
   start_date    DATE         NULL,
   end_date      DATE         NULL,
   start_mileage INT          NULL,
-  end_mileage   INT          NULL,
-  CONSTRAINT rentals_cars_id_fk
-  FOREIGN KEY (car_id) REFERENCES cars (id),
-  CONSTRAINT rentals_contacts_id_fk
-  FOREIGN KEY (client_id) REFERENCES contacts (id)
+  end_mileage   INT          NULL
 )
-  ENGINE = InnoDB, DEFAULT CHARSET = utf8;
+  ENGINE = InnoDB;
 
 CREATE INDEX rentals_cars_id_fk
   ON rentals (car_id);
 
 CREATE INDEX rentals_contacts_id_fk
   ON rentals (client_id);
+
+ALTER TABLE rentals
+  ADD CONSTRAINT rentals_cars_id_fk
+FOREIGN KEY (car_id) REFERENCES cars (id);
+
+ALTER TABLE rentals
+  ADD CONSTRAINT rentals_contacts_id_fk
+FOREIGN KEY (client_id) REFERENCES contacts (id);
 
