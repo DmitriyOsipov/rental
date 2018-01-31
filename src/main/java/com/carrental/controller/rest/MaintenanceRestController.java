@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/rest/maintenance")
+@RequestMapping("/rest/maintenances")
 public class MaintenanceRestController {
 
   @Autowired
