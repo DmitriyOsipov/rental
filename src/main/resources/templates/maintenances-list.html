@@ -7,11 +7,10 @@
   <p th:include="top-bot-menu-part::tmb-part"></p>
   <section class="mainSect">
     <div th:if="${result.get(T(com.carrental.domain.ResponseKeys).STATUS).code == 200}"
-         th:fragment="maintenance-list">
+         th:fragment="maintenances-data">
       <div class="maintenances-total"
            th:if="${result.get(T(com.carrental.domain.ResponseKeys).MAINTENANCE_TOTAL) != null}"
-           th:text="|${result.get(T(com.carrental.domain.ResponseKeys).MAINTENANCE_TOTAL)}|">
-        Total cost of maintenances is
+           th:text="|Total cost of maintenances is ${result.get(T(com.carrental.domain.ResponseKeys).MAINTENANCE_TOTAL)}|">
       </div>
       <div
           th:if="${not #lists.isEmpty(result.get(T(com.carrental.domain.ResponseKeys).MAINTENANCE_LIST))}"
@@ -26,7 +25,8 @@
           </tr>
           <tr th:each="maintenance : ${result.get(T(com.carrental.domain.ResponseKeys).MAINTENANCE_LIST)}">
             <td class="items-table-item">
-              <a th:href="@{/maintenances/{id}(id=${maintenance.id})}"><img th:src="@{/img/arrow.png}" class="img-arrow-link"/></a>
+              <a th:href="@{/maintenances/{id}(id=${maintenance.id})}"><img
+                  th:src="@{/img/arrow.png}" class="img-arrow-link"/></a>
             </td>
             <td class="items-table-item"
                 th:text="|${maintenance.car.type} (id: ${maintenance.car.id} )|"></td>
