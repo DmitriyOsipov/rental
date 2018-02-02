@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+<div th:fragment="tmb-part">
+
+<section class="logoSect">
+	<p id="headText">Welcome to demonstration</p>
+</section>
+
+<section class="menuSect">
+    <h2>Make your choise</h2>:
+    <ul class="menu">
+		<li><a href="/">To the main page</a></li>
+        <li><a href="/cars">View cars</a></li>
+          <ul class="submenu">
+            <li><a href="/newcar">Add a new car</a></li>
+            <li><a href="/cars/update">Update a car</a></li>
+          </ul>
+        <li><a href="/rentals">View rentals</a></li>
+          <ul class="submenu">
+            <li><a href="/rentals/current">View current rentals</a></li>
+            <li><a href="/rentals/add">Add a new rental</a></li>
+            <li><a href="/rentals/update">Update a rental</a></li>
+            <li><a href="/rentals/close">Close a rental</a></li>
+          </ul>
+        <li><a href="/maintenances">View maintenances</a></li>
+          <ul class="submenu">
+            <li><a href="/maintenances/current">View current maintenances</a></li>
+            <li><a href="/maintenances/add">Add a new maintenance</a></li>
+            <li><a href="/maintenances/update">Update a maintenance</a></li>
+            <li><a href="/maintenances/close">Close a maintenance</a></li>
+          </ul>
+        <li><a href="/contacts">View contacts</a></li>
+          <ul class="submenu">
+            <li><a href="/contacts">View contacts</a></li>
+            <li><a href="/contacts/add">Add a new contact</a></li>
+            <li><a href="/contacts/update">Update a contact</a></li>
+            <li><a href="/contacts/delete">Delete a contact</a></li>
+          </ul>
+    </ul>
+</section>
+
+<section class="footerSect">
+    <p class="copyright">Made with Spring Boot, Hibernate, H2 DB and Thymeleaf for UI</p>
+</section>
+</div>
+</body>
+
+</html>

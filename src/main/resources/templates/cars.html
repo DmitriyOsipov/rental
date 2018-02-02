@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="template-head-part::head-part">
+</head>
+<body>
+  <div class="grid-container">
+    <p th:include="top-bot-menu-part::tmb-part"></p>
+    <section class="mainSect">
+      <div th:if="${result.get(T(com.carrental.domain.ResponseKeys).STATUS).code == 200}">
+      <div th:if="${not #lists.isEmpty(result.get(T(com.carrental.domain.ResponseKeys).CAR_LIST))}">
+          <ul th:each="car : ${result.get(T(com.carrental.domain.ResponseKeys).CAR_LIST)}" class="items-list">
+            <li class="item-in-list"><a th:href="@{/cars/{id}(id=${car.id})}" th:text="${car.type}"></a></li>
+          </ul>
+      </div>
+        <div th:if="${#lists.isEmpty(result.get(T(com.carrental.domain.ResponseKeys).CAR_LIST))}">
+          <p class="no-data">No data found</p>
+        </div>
+      </div>
+      <div th:if="${result.get(T(com.carrental.domain.ResponseKeys).STATUS).code != 200}">
+        <br th:include="error-part::error-block"/>
+      </div>
+    </section>
+  </div>
+</body>
+</html>

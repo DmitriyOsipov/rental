@@ -15,7 +15,7 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 @ControllerAdvice(basePackages = {"com.carrental.controller"})
-public class CarExceprionsHandler extends ResponseEntityExceptionHandler {
+public class CarExceptionsHandler extends ResponseEntityExceptionHandler {
 
   @Autowired
   private ExceptionHandlerUtil utils;

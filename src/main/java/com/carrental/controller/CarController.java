@@ -3,6 +3,7 @@ package com.carrental.controller;
 import com.carrental.domain.Response;
 import com.carrental.domain.ResponseKeys;
 import com.carrental.event.CarGetEvent;
+import com.carrental.exception.CarAlreadyExistsException;
 import com.carrental.exception.CarException;
 import com.carrental.model.Car;
 import com.carrental.service.CarService;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,10 +29,11 @@ public class CarController {
   private ApplicationEventPublisher publisher;
 
   @RequestMapping(method = RequestMethod.GET)
-  public String getAll(Model model) {
+  public String getAll(Model model) throws CarException {
     Response response = new Response();
     response.put(ResponseKeys.CAR_LIST, carService.getAllCars());
-    model.addAttribute("response", response);
+    model.addAttribute("result", response);
+    //throw new CarAlreadyExistsException();
     return "cars";
   }
 
@@ -44,10 +47,10 @@ public class CarController {
   }
 
   @RequestMapping(value = "/new", method = RequestMethod.POST)
-  public String addNew(Model model, @RequestBody Car car) throws CarException {
+  public String addNew(@ModelAttribute("car") Car car, Model model) throws CarException {
     Car added = carService.addCar(car);
     model.addAttribute("response", new Response(ResponseKeys.CAR, added));
-    return "cars/".concat(String.valueOf(added.getId()));
+    return "cars";
   }
 
   @RequestMapping(value = "/update", method = RequestMethod.PUT)
