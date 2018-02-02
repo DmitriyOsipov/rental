@@ -8,9 +8,9 @@ INSERT INTO cars (id, car_type, mileage, last_maintenance) VALUES (5, 'mercedes'
 INSERT INTO contacts (id, name, phone, email, birthday, note) VALUES (1, 'John Wayne', '55515734', 'jw@smth.com', '1907-05-26', null);
 INSERT INTO contacts (id, name, phone, email, birthday, note) VALUES (2, 'Harrison Ford', '55573159', 'hw@gm.com', '1942-06-13', 'Han Solo');
 INSERT INTO contacts (id, name, phone, email, birthday, note) VALUES (3, 'Arthur West', '75313579', 'aw@sm.net', '1989-01-01', null);
-INSERT INTO maintenances (id, status, date_done, cost, car_id) VALUES (1, 'SCHEDULED', '2018-01-15', 500, 2);
-INSERT INTO maintenances (id, status, date_done, cost, car_id) VALUES (2, 'DONE', '2010-05-05', 300, 4);
-INSERT INTO maintenances (id, status, date_done, cost, car_id) VALUES (3, 'DONE', '2015-03-18', 500, 4);
+INSERT INTO maintenances (id, status, date_done, cost, car_id) VALUES (1, 0, '2018-01-15', 500, 2);
+INSERT INTO maintenances (id, status, date_done, cost, car_id) VALUES (2, 2, '2010-05-05', 300, 4);
+INSERT INTO maintenances (id, status, date_done, cost, car_id) VALUES (3, 2, '2015-03-18', 500, 4);
 INSERT INTO rentals (id, car_id, client_id, contact_info, price, start_date, end_date, start_mileage, end_mileage) VALUES (1, 1, 1, null, 1000, '2018-01-01', '2018-01-10', 5, 15);
 INSERT INTO rentals (id, car_id, client_id, contact_info, price, start_date, end_date, start_mileage, end_mileage) VALUES (2, 2, 3, null, 700, '2017-12-15', '2018-01-05', 50010, 51000);
 INSERT INTO rentals (id, car_id, client_id, contact_info, price, start_date, end_date, start_mileage, end_mileage) VALUES (3, 4, 3, null, 500, '2017-11-01', '2017-12-15', 130000, 149500);

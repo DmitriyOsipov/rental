@@ -41,7 +41,7 @@ CREATE TABLE maintenances
 (
   id        BIGINT AUTO_INCREMENT
     PRIMARY KEY,
-  status    VARCHAR(45)        NOT NULL,
+  status    INT                NOT NULL,
   date_done DATE               NOT NULL,
   cost      DOUBLE DEFAULT '0' NOT NULL,
   car_id    BIGINT             NOT NULL
