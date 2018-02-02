@@ -7,6 +7,7 @@
   <p th:include="top-bot-menu-part::tmb-part"></p>
   <section class="mainSect">
     <div class="car-carform" th:with="car=${result.get(T(com.carrental.domain.ResponseKeys).CAR)}">
+      <p class="section-title">Car data</p>
       <form action="#" th:action="@{/cars/update}" th:object="${car}" th:method="post" class="update-item-form">
         <input type="hidden" th:field="*{id}" name="id"/>
         <table class="item-form-table">
@@ -31,11 +32,6 @@
           <tr>
             <td class="item-form-table-btn">
               <input type="submit" value="Submit" />
-            </td>
-          </tr>
-          <tr>
-            <td class="item-form-table-btn">
-              <input type="reset" value="Reset" />
             </td>
           </tr>
         </table>

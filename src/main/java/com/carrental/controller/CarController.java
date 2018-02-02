@@ -48,6 +48,7 @@ public class CarController {
     Response response = new Response(ResponseKeys.CAR, car);
     publisher.publishEvent(new CarGetEvent(response, car));
     model.addAttribute("result", response);
+    model.addAttribute(car);
     return "car-page";
   }
 
@@ -61,15 +62,16 @@ public class CarController {
   public String addNew(@ModelAttribute Car car, Model model, SessionStatus sessionStatus)
       throws CarException {
     Car added = carService.addCar(car);
-    sessionStatus.setComplete();
     model.addAttribute("result", new Response(ResponseKeys.CAR, added));
+    model.addAttribute("car", added);
     return "redirect:/cars/".concat(String.valueOf(car.getId()));
   }
 
   @RequestMapping(value = "/update", method = RequestMethod.PUT)
-  public String update(Model model, @RequestBody Car toUpdate) throws CarException {
-    Car updated = carService.updateCar(toUpdate);
+  public String update(Model model, @RequestBody Car car) throws CarException {
+    Car updated = carService.updateCar(car);
     model.addAttribute("result", new Response(ResponseKeys.CAR, updated));
+    model.addAttribute("car", updated);
     return "car-page";
   }
 
