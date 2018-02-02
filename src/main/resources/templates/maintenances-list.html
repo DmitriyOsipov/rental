@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="template-head-part::head-part">
+</head>
+<body>
+<div class="grid-container">
+  <p th:include="top-bot-menu-part::tmb-part"></p>
+  <section class="mainSect">
+    <div th:if="${result.get(T(com.carrental.domain.ResponseKeys).STATUS).code == 200}" th:fragment="maintenance-list">
+      <div class="maintenances-total" th:text="'Total cost of maintenances' + ${result.get(T(com.carrental.domain.ResponseKeys).MAINTENANCE_TOTAL}"></div>
+      <div th:if="${not #lists.isEmpty(result.get(T(com.carrental.domain.ResponseKeys).MAINTENANCE_LIST))}" class="maintenances-list">
+        <table class="items-table">
+          <tr>
+            <td class="items-table-header">Car</td>
+            <td class="items-table-header">Date</td>
+            <td class="items-table-header">Cost</td>
+            <td class="items-table-header">Status</td>
+          </tr>
+          <tr th:each="maintenance : ${result.get(T(com.carrental.domain.ResponseKeys).MAINTENANCE_LIST)}">
+            <td class="items-table-item"><a th:href="@{//maintenances/{id}(id=${maintenance.id})}" th:text="${maintenance.car}" class="maint-link"></a></td>
+            <td class="items-table-item" th:text="${maintenance.dateDone}"></td>
+            <td class="items-table-item" th:text="${maintenance.cost}"></td>
+          </tr>
+        </table>
+      </div>
+      <div th:if="${#lists.isEmpty(result.get(T(com.carrental.domain.ResponseKeys).MAINTENANCE_LIST))}">
+        <p class="no-data">No data found</p>
+      </div>
+    </div>
+    <div th:if="${result.get(T(com.carrental.domain.ResponseKeys).STATUS).code != 200}">
+      <br th:include="error-part::error-block"/>
+    </div>
+  </section>
+</div>
+</body>
+</html>

@@ -85,4 +85,8 @@ public class MaintenanceService {
     toClose.setStatus(MaintenanceStatus.DONE);
     return this.update(toClose);
   }
+
+  public double getTotalCost(List<Maintenance> maintenanceList) {
+    return maintenanceList.stream().mapToDouble(Maintenance::getCost).sum();
+  }
 }

@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/maintenances")
 public class MaintenanceController {
@@ -22,11 +24,24 @@ public class MaintenanceController {
   @Autowired
   private MaintenanceService maintenanceService;
 
+  private Response getListResponse(List<Maintenance> maintenances) {
+    Response response = new Response(ResponseKeys.MAINTENANCE_LIST, maintenances);
+    response.put(ResponseKeys.MAINTENANCE_TOTAL, maintenanceService.getTotalCost(maintenances));
+    return response;
+  }
+
   @RequestMapping
+  public String getAll(Model model) {
+    List<Maintenance> maintenances = maintenanceService.getAll();
+    model.addAttribute("result", getListResponse(maintenances));
+    return "maintenances-list";
+  }
+
+  @RequestMapping("/current")
   public String current(Model model) {
-    model.addAttribute("response",
-        new Response(ResponseKeys.MAINTENANCE_LIST, maintenanceService.getAllUnfinished()));
-    return "maintenance";
+    List<Maintenance> maintenances = maintenanceService.getAllUnfinished();
+    model.addAttribute("result", getListResponse(maintenances));
+    return "maintenances-list";
   }
 
   @RequestMapping("/{id}")
