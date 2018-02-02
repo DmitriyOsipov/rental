@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="template-head-part::head-part">
+</head>
+<body>
+<div class="grid-container">
+  <p th:include="top-bot-menu-part::tmb-part"></p>
+  <section class="mainSect">
+    <div class="car-carform" th:with="car=${result.get(T(com.carrental.domain.ResponseKeys).CAR)}">
+      <form action="#" th:action="@{/cars/update}" th:object="${car}" th:method="post" class="update-item-form">
+        <input type="hidden" th:field="*{id}" name="id"/>
+        <table class="item-form-table">
+          <tr>
+            <td class="item-form-table-lbl">Car type</td>
+            <td class="item-form-table-value">
+              <input type="text" th:field="*{type}" name="type"/>
+            </td>
+          </tr>
+          <tr>
+            <td class="item-form-table-lbl">Car mileage</td>
+            <td class="item-form-table-value">
+              <input type="number" min="0" th:field="*{mileage}" name="mileage"/>
+            </td>
+          </tr>
+          <tr>
+            <td class="item-form-table-lbl">Last maintenance</td>
+            <td class="item-form-table-value">
+              <input type="number" min="0" th:field="*{lastMaintenance}" name="lastMaintenance"/>
+            </td>
+          </tr>
+          <tr>
+            <td class="item-form-table-btn">
+              <input type="submit" value="Submit" />
+            </td>
+          </tr>
+          <tr>
+            <td class="item-form-table-btn">
+              <input type="reset" value="Reset" />
+            </td>
+          </tr>
+        </table>
+      </form>
+    </div>
+    <div class="car-rentals"></div>
+    <div class="car-maintenances"></div>
+  </section>
+</div>
+</body>
+</html>

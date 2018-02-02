@@ -12,11 +12,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.support.SessionStatus;
 
 @Controller
 @RequestMapping("/cars")
@@ -28,42 +32,51 @@ public class CarController {
   @Autowired
   private ApplicationEventPublisher publisher;
 
-  @RequestMapping(method = RequestMethod.GET)
+  @GetMapping
   public String getAll(Model model) throws CarException {
     Response response = new Response();
     response.put(ResponseKeys.CAR_LIST, carService.getAllCars());
     model.addAttribute("result", response);
     //throw new CarAlreadyExistsException();
-    return "cars";
+    return "cars-list";
   }
 
-  @RequestMapping("/{id}")
+  @GetMapping("/{id}")
   public String getCar(Model model, @PathVariable long id) throws CarException {
+    model.addAttribute(new Car());
     Car car = carService.getCar(id);
     Response response = new Response(ResponseKeys.CAR, car);
     publisher.publishEvent(new CarGetEvent(response, car));
-    model.addAttribute("response", response);
-    return "cars/".concat(String.valueOf(id));
+    model.addAttribute("result", response);
+    return "car-page";
   }
 
-  @RequestMapping(value = "/new", method = RequestMethod.POST)
-  public String addNew(@ModelAttribute("car") Car car, Model model) throws CarException {
+  @GetMapping("/new")
+  public String addNew(Model model) {
+    model.addAttribute(new Car());
+    return "car-new";
+  }
+
+  @PostMapping("/new")
+  public String addNew(@ModelAttribute Car car, Model model, SessionStatus sessionStatus)
+      throws CarException {
     Car added = carService.addCar(car);
-    model.addAttribute("response", new Response(ResponseKeys.CAR, added));
-    return "cars";
+    sessionStatus.setComplete();
+    model.addAttribute("result", new Response(ResponseKeys.CAR, added));
+    return "redirect:/cars/".concat(String.valueOf(car.getId()));
   }
 
   @RequestMapping(value = "/update", method = RequestMethod.PUT)
-  public String update(Model model, @RequestBody Car car) throws CarException {
-    Car updated = carService.updateCar(car);
-    model.addAttribute("response", new Response(ResponseKeys.CAR, updated));
-    return "cars/".concat(String.valueOf(updated.getId()));
+  public String update(Model model, @RequestBody Car toUpdate) throws CarException {
+    Car updated = carService.updateCar(toUpdate);
+    model.addAttribute("result", new Response(ResponseKeys.CAR, updated));
+    return "car-page";
   }
 
   @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
   public String delete(Model model, @PathVariable long id) throws CarException {
-    model.addAttribute("response",
+    model.addAttribute("result",
         new Response(ResponseKeys.CAR_DELETED, carService.deleteCar(id)));
-    return "cars";
+    return "redirect:/cars";
   }
 }

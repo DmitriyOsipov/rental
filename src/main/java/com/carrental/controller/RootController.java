@@ -12,9 +12,4 @@ public class RootController {
   public String initController() {
     return "index";
   }
-
-  @RequestMapping(value = "newcar")
-  public String newCar() {
-    return "cars-new";
-  }
 }
