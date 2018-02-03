@@ -29,9 +29,10 @@
                   th:src="@{/img/arrow.png}" class="img-arrow-link"/></a>
             </td>
             <td class="items-table-item"
-                th:text="|${rental.car.type} (id: ${rental.car.id} )|"></td>
+                th:text="|${rental.car.type} (id: ${rental.car.id})|"></td>
             <td class="items-table-item"
-                th:text="|${rental.client.name} (id: ${rental.client.phone} )|"></td>
+                th:text="${rental.client}!=null ? ${rental.client.name} : ''">
+            </td>
             <td class="items-table-item" th:text="${rental.contactInfo}"></td>
             <td class="items-table-item" th:text="${rental.price}"></td>
             <td class="items-table-item" th:text="${rental.startDate}"></td>
