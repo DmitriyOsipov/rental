@@ -24,49 +24,49 @@ public class RentalController {
 
   @RequestMapping(method = RequestMethod.GET)
   public String getAll(Model model) {
-    model.addAttribute("response", new Response(ResponseKeys.RENTAL_LIST, rentalService.getAll()));
-    return "rentals";
+    model.addAttribute("result", new Response(ResponseKeys.RENTAL_LIST, rentalService.getAll()));
+    return "rentals-list";
   }
 
   @RequestMapping("/current")
   public String get(Model model) {
-    model.addAttribute("response",
+    model.addAttribute("result",
         new Response(ResponseKeys.RENTAL_LIST, rentalService.getCurrentRentals()));
-    return "rentals/current";
+    return "rentals-list";
   }
 
   @RequestMapping("/{id}")
   public String get(Model model, @PathVariable long id) throws RentalException {
-    model.addAttribute("response", new Response(ResponseKeys.RENTAL, rentalService.getRental(id)));
-    return "rentals".concat(String.valueOf(id));
+    model.addAttribute("result", new Response(ResponseKeys.RENTAL, rentalService.getRental(id)));
+    return "rental-page";
   }
 
   @RequestMapping("/add")
   public String addNew(Model model, @RequestBody Rental toAdd) throws RentalException {
     Rental added = rentalService.addRental(toAdd);
-    model.addAttribute("response", new Response(ResponseKeys.RENTAL, added));
+    model.addAttribute("result", new Response(ResponseKeys.RENTAL, added));
     return "rentals/".concat(String.valueOf(added.getId()));
   }
 
   @RequestMapping(value = "/update", method = RequestMethod.PUT)
   public String update(Model model, @RequestBody Rental rental) throws RentalException {
     Rental updated = rentalService.updateRental(rental);
-    model.addAttribute("response", new Response(ResponseKeys.RENTAL, updated));
-    return "rentals/".concat(String.valueOf(updated.getId()));
+    model.addAttribute("result", new Response(ResponseKeys.RENTAL, updated));
+    return "redirect:/rentals/".concat(String.valueOf(updated.getId()));
   }
 
   @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
   public String delete(Model model, @PathVariable long id) throws RentalException {
-    model.addAttribute("response",
+    model.addAttribute("result",
         new Response(ResponseKeys.RENTAL_DELETED, rentalService.deleteRental(id)));
-    return "rentals";
+    return "redirect:/rentals";
   }
 
   @RequestMapping(value = "/close", method = RequestMethod.PUT)
   public String closeRental(Model model, @RequestParam(name = "id") long id,
       @RequestParam(name = "endMile") int endMile) throws RentalException {
-    model.addAttribute("response",
+    model.addAttribute("result",
         new Response(ResponseKeys.RENTAL, rentalService.closeRental(id, endMile)));
-    return "rentals/".concat(String.valueOf(id));
+    return "rentals-list";
   }
 }

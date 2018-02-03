@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="template-head-part::head-part">
+</head>
+<body>
+<div class="grid-container">
+  <p th:include="top-bot-menu-part::tmb-part"></p>
+  <section class="mainSect">
+    <div th:if="${result.get(T(com.carrental.domain.ResponseKeys).STATUS).code == 200}"
+         th:fragment="rentals-data">
+      <div
+          th:if="${not #lists.isEmpty(result.get(T(com.carrental.domain.ResponseKeys).RENTAL_LIST))}"
+          class="rental-list">
+        <table class="items-table">
+          <tr>
+            <td class="items-table-header"></td>
+            <td class="items-table-header">Car</td>
+            <td class="items-table-header">Client</td>
+            <td class="items-table-header">Contact information</td>
+            <td class="items-table-header">Price</td>
+            <td class="items-table-header">Start date</td>
+            <td class="items-table-header">End date</td>
+            <td class="items-table-header">Start mileage</td>
+            <td class="items-table-header">End mileage</td>
+          </tr>
+          <tr th:each="rental : ${result.get(T(com.carrental.domain.ResponseKeys).RENTAL_LIST)}">
+            <td class="items-table-item">
+              <a th:href="@{/rentals/{id}(id=${rental.id})}"><img
+                  th:src="@{/img/arrow.png}" class="img-arrow-link"/></a>
+            </td>
+            <td class="items-table-item"
+                th:text="|${rental.car.type} (id: ${rental.car.id} )|"></td>
+            <td class="items-table-item"
+                th:text="|${rental.client.name} (id: ${rental.client.phone} )|"></td>
+            <td class="items-table-item" th:text="${rental.contactInfo}"></td>
+            <td class="items-table-item" th:text="${rental.price}"></td>
+            <td class="items-table-item" th:text="${rental.startDate}"></td>
+            <td class="items-table-item" th:text="${rental.endDate}"></td>
+            <td class="items-table-item" th:text="${rental.startMileage}"></td>
+            <td class="items-table-item" th:text="${rental.endMileage}"></td>
+          </tr>
+        </table>
+      </div>
+      <div
+          th:if="${#lists.isEmpty(result.get(T(com.carrental.domain.ResponseKeys).RENTAL_LIST))}">
+        <p class="no-data">No data found</p>
+      </div>
+    </div>
+    <div th:if="${result.get(T(com.carrental.domain.ResponseKeys).STATUS).code != 200}">
+      <br th:include="error-part::error-block"/>
+    </div>
+  </section>
+</div>
+</body>
+</html>

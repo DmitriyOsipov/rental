@@ -37,7 +37,10 @@
         </table>
       </form>
     </div>
-    <div class="car-rentals"></div>
+    <div class="car-rentals">
+      <h1 class="car-rentals-header">Car rentals</h1>
+      <div th:include="rentals-list::rentals-data"></div>
+    </div>
     <div class="car-maintenances">
       <h1 class="car-maintenances-header">Car maintenances</h1>
       <div th:include="maintenances-list::maintenances-data"></div>
