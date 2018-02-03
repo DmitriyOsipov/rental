@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="template-head-part::head-part">
+</head>
+<body>
+<div class="grid-container">
+  <p th:include="top-bot-menu-part::tmb-part"></p>
+  <section class="mainSect">
+    <div class="contact-form" th:with="contact=${result.get(T(com.carrental.domain.ResponseKeys).CONTACT)}">
+      <p class="section-title">Contact data</p>
+      <form action="#" th:action="@{/contacts/update}" th:object="${contact}" th:method="post" class="update-item-form">
+        <input type="hidden" th:field="*{id}" name="id"/>
+        <table class="item-form-table">
+          <tr>
+            <td class="item-form-table-lbl">Contact name</td>
+            <td class="item-form-table-value">
+              <input type="text" th:field="*{name}" name="name"/>
+            </td>
+          </tr>
+          <tr>
+            <td class="item-form-table-lbl">Contact phone</td>
+            <td class="item-form-table-value">
+              <input type="text" th:field="*{phone}" name="phone"/>
+            </td>
+          </tr>
+          <tr>
+            <td class="item-form-table-lbl">Contact email</td>
+            <td class="item-form-table-value">
+              <input type="text" th:field="*{email}" name="email"/>
+            </td>
+          </tr>
+          <tr>
+            <td class="item-form-table-lbl">Contact birthday</td>
+            <td class="item-form-table-value">
+              <input type="text" th:field="*{birthday}" name="birthday"/>
+            </td>
+          </tr>
+          <tr>
+            <td class="item-form-table-lbl">Note</td>
+            <td class="item-form-table-value">
+              <input type="text" th:field="*{note}" name="note"/>
+            </td>
+          </tr>
+          <tr>
+            <td class="item-form-table-btn">
+              <input type="submit" value="update" />
+            </td>
+          </tr>
+        </table>
+      </form>
+    </div>
+    <div class="contact-delete">
+      <form method="post" th:action="@{|/contacts/delete/${contact.id}|}" class="delete-item-form">
+        <input type="submit" value="Delete contact"/>
+      </form>
+    </div>
+  </section>
+</div>
+</body>
+</html>

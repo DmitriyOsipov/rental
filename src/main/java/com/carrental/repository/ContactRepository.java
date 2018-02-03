@@ -9,12 +9,10 @@ import java.util.List;
 
 public interface ContactRepository extends JpaRepository<Contact, Long> {
 
-  List<Contact> findAllByNameLike(String name);
+  List<Contact> findAllByNameContainsIgnoreCase(String name);
 
   Contact findFirstByPhone(String phone);
 
-  Contact findFirstByEmail(String email);
-
-  List<Contact> findAllByBirthday(LocalDate birthday);
+  Contact findFirstByEmailIgnoreCase(String email);
 
 }

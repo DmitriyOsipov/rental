@@ -52,11 +52,7 @@ public class ContactService {
   }
 
   public List<Contact> getAll(String name) {
-    return repository.findAllByNameLike(name);
-  }
-
-  public List<Contact> getAll(LocalDate birthday) {
-    return repository.findAllByBirthday(birthday);
+    return repository.findAllByNameContainsIgnoreCase(name);
   }
 
   public Contact getByPhone(String phone) {
@@ -64,6 +60,14 @@ public class ContactService {
   }
 
   public Contact getByEmail(String email) {
-    return repository.findFirstByEmail(email);
+    return repository.findFirstByEmailIgnoreCase(email);
+  }
+
+  public Contact get(long id) throws ContactException {
+    Contact found = repository.getOne(id);
+    if (found == null) {
+      throw new ContactNotFoundException();
+    }
+    return found;
   }
 }

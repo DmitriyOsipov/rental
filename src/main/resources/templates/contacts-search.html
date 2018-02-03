@@ -1,0 +1,19 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="template-head-part::head-part">
+</head>
+<body>
+<div class="grid-container">
+  <p th:include="top-bot-menu-part::tmb-part"></p>
+  <section class="mainSect">
+    <div class="search-div">
+      <h1 class="search header" th:text="|Search contacts by ${searchParam}"></h1>
+      <form action="#" th:action="|/contacts/by${searchParam}" method="get" class="search-form">
+        <input type="text" th:id="${searchParam}" th:name="${searchParam}" class="search-form-el"/>
+        <input type="submit" class="search-form-submit" value="Search"/>
+      </form>
+    </div>
+  </section>
+</div>
+</body>
+</html>
