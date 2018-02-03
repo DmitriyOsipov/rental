@@ -53,7 +53,7 @@ CREATE TABLE rentals
   id            BIGINT AUTO_INCREMENT
     PRIMARY KEY,
   car_id        BIGINT       NOT NULL,
-  client_id     BIGINT       NOT NULL,
+  client_id     BIGINT       NULL,
   contact_info  VARCHAR(250) NULL,
   price         DOUBLE       NULL,
   start_date    DATE         NULL,
@@ -75,5 +75,5 @@ FOREIGN KEY (car_id) REFERENCES cars (id);
 
 ALTER TABLE rentals
   ADD CONSTRAINT rentals_contacts_id_fk
-FOREIGN KEY (client_id) REFERENCES contacts (id);
+FOREIGN KEY (client_id) REFERENCES contacts (id) ON DELETE SET NULL;
 
