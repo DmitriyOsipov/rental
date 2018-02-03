@@ -4,6 +4,7 @@ import com.carrental.domain.Response;
 import com.carrental.domain.ResponseKeys;
 import com.carrental.exception.MaintenanceException;
 import com.carrental.model.Maintenance;
+import com.carrental.model.Maintenance.MaintenanceStatus;
 import com.carrental.service.MaintenanceService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,38 +47,26 @@ public class MaintenanceController {
 
   @RequestMapping("/{id}")
   public String getOne(Model model, @PathVariable long id) throws MaintenanceException {
-    model.addAttribute("response",
+    model.addAttribute("result",
         new Response(ResponseKeys.MAINTENANCE, maintenanceService.get(id)));
-    return "maintenance/".concat(String.valueOf(id));
+    return "maintenance-page";
   }
 
-  @RequestMapping("/add")
-  public String addNew(Model model, @RequestBody Maintenance toAdd) throws MaintenanceException {
-    Maintenance added = maintenanceService.addMaintenance(toAdd);
-    model.addAttribute("response", new Response(ResponseKeys.MAINTENANCE, added));
-    return "maintenance/".concat(String.valueOf(added.getId()));
-  }
-
-  @RequestMapping(value = "/update", method = RequestMethod.PUT)
-  public String update(Model model, @RequestBody Maintenance toUpdate) throws MaintenanceException {
-    Maintenance updated = maintenanceService.update(toUpdate);
-    model.addAttribute("response", new Response(ResponseKeys.MAINTENANCE, updated));
-    return "maintenance/".concat(String.valueOf(updated.getId()));
-  }
-
-  @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
-  public String delete(Model model, @PathVariable long id) throws MaintenanceException {
-    model.addAttribute("response",
-        new Response(ResponseKeys.MAINTENANCE_DELETED, maintenanceService.delete(id)));
-    return "maintenance";
-  }
-
-  @RequestMapping(value = "/close", method = RequestMethod.PUT)
+  @RequestMapping(value = "/close", method = RequestMethod.POST)
   public String closeMaintenance(Model model, @RequestParam(name = "id") long id,
       @RequestParam(name = "total") double total) throws MaintenanceException {
     model.addAttribute("response",
         new Response(ResponseKeys.MAINTENANCE, maintenanceService.closeMaintenance(id, total)));
-    return "maintenance/".concat(String.valueOf(id));
+    return "redirect:/maintenances/".concat(String.valueOf(id));
+  }
+
+  @RequestMapping(value = "/toprogress", method = RequestMethod.POST)
+  public String progressMaintenance(Model model, @RequestParam(name = "id") long id)
+      throws MaintenanceException {
+    model.addAttribute("result",
+        new Response(ResponseKeys.MAINTENANCE,
+            maintenanceService.changeStatus(id, MaintenanceStatus.IN_PROGRESS)));
+    return "redirect:/maintenances/".concat(String.valueOf(id));
   }
 
 }

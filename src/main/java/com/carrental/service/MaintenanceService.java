@@ -89,4 +89,21 @@ public class MaintenanceService {
   public double getTotalCost(List<Maintenance> maintenanceList) {
     return maintenanceList.stream().mapToDouble(Maintenance::getCost).sum();
   }
+
+  public Maintenance changeStatus(long id, MaintenanceStatus status) throws MaintenanceException {
+    Maintenance inDb = repository.findOne(id);
+    if (status == MaintenanceStatus.DONE) {
+      throw new MaintenanceInvalidException(
+          "You need to use special function for closing maintenance");
+    }
+    if (inDb == null) {
+      throw new MaintenanceNotFoundException();
+    }
+    if (inDb.getStatus().compareTo(status) >= 0) {
+      throw new MaintenanceInvalidException("Maintenance already has the same or greater status");
+    }
+    inDb.setStatus(status);
+    repository.save(inDb);
+    return inDb;
+  }
 }

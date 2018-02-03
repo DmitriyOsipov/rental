@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="template-head-part::head-part">
+</head>
+<body>
+<div class="grid-container">
+  <p th:include="top-bot-menu-part::tmb-part"></p>
+  <section class="mainSect">
+    <div class="maintenance-data"
+         th:with="mainten=${result.get(T(com.carrental.domain.ResponseKeys).MAINTENANCE)}">
+      <p class="section-title">Maintenance data</p>
+      <table class="maintenance-table" th:object="${mainten}">
+        <tr>
+          <td class="maintenance-table-lbl">ID</td>
+          <td class="maintenance-table-value" th:text="*{id}"></td>
+        </tr>
+        <tr>
+          <td class="maintenance-table-lbl">Car</td>
+          <td class="maintenance-table-value" th:text="|*{car.type}(id:*{car.id})|"></td>
+        </tr>
+        <tr>
+          <td class="maintenance-table-lbl">Date</td>
+          <td class="maintenance-table-value" th:text="*{dateDone}"></td>
+        </tr>
+        <tr>
+          <td class="maintenance-table-lbl">Cost</td>
+          <td class="maintenance-table-value" th:text="*{cost}"></td>
+        </tr>
+        <tr>
+          <td class="maintenance-table-lbl">Status</td>
+          <td class="maintenance-table-value" th:text="*{status}"></td>
+        </tr>
+      </table>
+      <form action="/maintenances/toprogress" class="update-item-form" method="post"
+            th:if="${mainten.status == T(com.carrental.model.Maintenance.MaintenanceStatus).SCHEDULED}">
+        <input type="hidden" id="id" name="id" th:value="${mainten.id}"/>
+        <input type="submit" value="To progress"/>
+      </form>
+      <form action="/maintenances/close" class="update-item-form" method="post"
+            th:if="${mainten.status == T(com.carrental.model.Maintenance.MaintenanceStatus).IN_PROGRESS}">
+        <input type="hidden" id="id" name="id" th:value="${mainten.id}"/>
+        <input type="number" id="total" name="total" min="0"/>
+        <input type="submit" value="Close maintenance"/>
+      </form>
+    </div>
+  </section>
+</div>
+</body>
+</html>

@@ -4,42 +4,44 @@
 <body>
 <div th:fragment="tmb-part">
 
-<section class="logoSect">
-	<p id="headText">Welcome to demonstration</p>
-</section>
+  <section class="logoSect">
+    <p id="headText">Welcome to demonstration</p>
+  </section>
 
-<section class="menuSect">
-    <h2>Make your choise</h2>:
+  <section class="menuSect">
+    <h1>Make your choise:</h1>
     <ul class="menu">
-		<li><a href="/">To the main page</a></li>
-        <li><a href="/cars">View cars</a></li>
-          <ul class="submenu">
-            <li><a href="/cars/new">Add a new car</a></li>
-          </ul>
-        <li><a href="/rentals">View rentals</a></li>
-          <ul class="submenu">
-            <li><a href="/rentals/current">View current rentals</a></li>
-            <li><a href="/rentals/add">Add a new rental</a></li>
-          </ul>
-        <li><a href="/maintenances">View maintenances</a></li>
-          <ul class="submenu">
-            <li><a href="/maintenances/current">View current maintenances</a></li>
-            <li><a href="/maintenances/add">Add a new maintenance</a></li>
-          </ul>
-        <li><a href="/contacts">View contacts</a></li>
-          <ul class="submenu">
-            <li><a href="/contacts">View contacts</a></li>
-            <li><a href="/contacts/searchby?param=name">Search contacts by name</a></li>
-            <li><a href="/contacts/searchby?param=phone">Search contacts by phone</a></li>
-            <li><a href="/contacts/searchby?param=email">Search contacts by email</a></li>
-            <li><a href="/contacts/add">Add a new contact</a></li>
-          </ul>
+      <li><a href="/">To the main page</a></li>
+      <li><a href="/cars">Cars</a></li>
+      <ul class="submenu">
+        <li><a href="/cars">View all cars</a></li>
+        <li><a href="/cars/new">Add a new car</a></li>
+      </ul>
+      <li><a href="/rentals">Rentals</a></li>
+      <ul class="submenu">
+        <li><a href="/rentals">View all rentals</a></li>
+        <li><a href="/rentals/current">View current rentals</a></li>
+        <li><a href="/rentals/add">Add a new rental</a></li>
+      </ul>
+      <li><a href="/maintenances">Maintenances</a></li>
+      <ul class="submenu">
+        <li><a href="/maintenances">View all maintenances</a></li>
+        <li><a href="/maintenances/current">View current maintenances</a></li>
+      </ul>
+      <li><a href="/contacts">Contacts</a></li>
+      <ul class="submenu">
+        <li><a href="/contacts">View all contacts</a></li>
+        <li><a href="/contacts/searchby?param=name">Search contacts by name</a></li>
+        <li><a href="/contacts/searchby?param=phone">Search contacts by phone</a></li>
+        <li><a href="/contacts/searchby?param=email">Search contacts by email</a></li>
+        <li><a href="/contacts/add">Add a new contact</a></li>
+      </ul>
     </ul>
-</section>
+  </section>
 
-<section class="footerSect">
+  <section class="footerSect">
     <p class="copyright">Made with Spring Boot, Hibernate, H2 DB and Thymeleaf for UI</p>
-</section>
+  </section>
 </div>
 </body>
 
