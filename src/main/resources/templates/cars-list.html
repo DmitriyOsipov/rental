@@ -10,12 +10,17 @@
       <div th:if="${not #lists.isEmpty(result.get(T(com.carrental.domain.ResponseKeys).CAR_LIST))}">
         <table class="items-table">
           <tr>
+            <td class="items-table-header"></td>
             <td class="items-table-header">Car type</td>
             <td class="items-table-header">Car mileage, km</td>
             <td class="items-table-header">Last maintenance at, km</td>
           </tr>
           <tr th:each="car : ${result.get(T(com.carrental.domain.ResponseKeys).CAR_LIST)}">
-            <td class="items-table-item"><a th:href="@{/cars/{id}(id=${car.id})}" th:text="${car.type}" class="car-link"></a></td>
+            <td class="items-table-item">
+              <a th:href="@{/cars/{id}(id=${car.id})}" class="car-link">
+                <img th:src="@{/img/arrow.png}" class="img-arrow-link"/>
+              </a></td>
+            <td class="items-table-item" th:text="${car.type}"></td>
             <td class="items-table-item" th:text="${car.mileage}"></td>
             <td class="items-table-item" th:text="${car.lastMaintenance}"></td>
           </tr>
