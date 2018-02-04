@@ -11,6 +11,8 @@ import com.carrental.service.ContactService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -81,7 +83,7 @@ public class ContactController {
     return "contacts-list";
   }
 
-  @PostMapping("/delete/{id}")
+  @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
   public String deleteContact(Model model, @PathVariable("id") long id) {
     model.addAttribute("result",
         new Response(ResponseKeys.CONTACT_DELETED, contactService.delete(id)));
@@ -94,5 +96,20 @@ public class ContactController {
     model.addAttribute("contact", contact);
     model.addAttribute("result", new Response(ResponseKeys.CONTACT, contact));
     return "contact-page";
+  }
+
+  @RequestMapping(value = "/new", method = RequestMethod.GET)
+  public String prepareAddContact(Model model) {
+    model.addAttribute("contact", new Contact());
+    return "contact-new";
+  }
+
+  @RequestMapping(value = "/new", method = RequestMethod.POST)
+  public String addContact(Model model, @ModelAttribute("contact") Contact contact)
+      throws ContactException {
+    Contact added = contactService.add(contact);
+    model.addAttribute("result", new Response(ResponseKeys.CONTACT, contact));
+    model.addAttribute("contact", added);
+    return "redirect:/contacts";
   }
 }

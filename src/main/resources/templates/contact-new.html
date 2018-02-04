@@ -6,10 +6,10 @@
 <div class="grid-container">
   <p th:include="top-bot-menu-part::tmb-part"></p>
   <section class="mainSect">
-    <div class="contact-form" th:with="contact=${result.get(T(com.carrental.domain.ResponseKeys).CONTACT)}">
-      <p class="section-title">Contact data</p>
-      <form action="#" th:action="@{/contacts/update}" th:object="${contact}" th:method="post" class="update-item-form">
-        <input type="hidden" th:field="*{id}" name="id"/>
+    <div>
+      <form action="#" th:action="@{~/contacts/new}" th:object="${contact}" th:method="post"
+            class="new-item-form">
+        <input type="hidden" th:field="*{id}" value="0" name="id"/>
         <table class="item-form-table">
           <tr>
             <td class="item-form-table-lbl">Contact name</td>
@@ -18,19 +18,19 @@
             </td>
           </tr>
           <tr>
-            <td class="item-form-table-lbl">Contact phone</td>
+            <td class="item-form-table-lbl">Phone</td>
             <td class="item-form-table-value">
               <input type="text" th:field="*{phone}" name="phone"/>
             </td>
           </tr>
           <tr>
-            <td class="item-form-table-lbl">Contact email</td>
+            <td class="item-form-table-lbl">Email</td>
             <td class="item-form-table-value">
               <input type="email" th:field="*{email}" name="email"/>
             </td>
           </tr>
           <tr>
-            <td class="item-form-table-lbl">Contact birthday</td>
+            <td class="item-form-table-lbl">Birthday</td>
             <td class="item-form-table-value">
               <input type="date" th:field="*{birthday}" name="birthday"/>
             </td>
@@ -38,20 +38,20 @@
           <tr>
             <td class="item-form-table-lbl">Note</td>
             <td class="item-form-table-value">
-              <input type="text" th:field="*{note}" name="note"/>
+              <input type="text" min="0" th:field="*{note}" name="note"/>
             </td>
           </tr>
           <tr>
             <td class="item-form-table-btn">
-              <input type="submit" value="Update" />
+              <input type="submit" value="Add contact"/>
+            </td>
+          </tr>
+          <tr>
+            <td class="item-form-table-btn">
+              <input type="reset" value="Reset"/>
             </td>
           </tr>
         </table>
-      </form>
-    </div>
-    <div class="contact-delete">
-      <form method="post" th:action="@{|/contacts/delete/${contact.id}|}" class="delete-item-form">
-        <input type="submit" value="Delete contact"/>
       </form>
     </div>
   </section>
