@@ -5,6 +5,7 @@ import com.carrental.domain.ResponseKeys;
 import com.carrental.event.CarGetEvent;
 import com.carrental.exception.CarAlreadyExistsException;
 import com.carrental.exception.CarException;
+import com.carrental.exception.CarNotFoundException;
 import com.carrental.model.Car;
 import com.carrental.service.CarService;
 
@@ -33,11 +34,10 @@ public class CarController {
   private ApplicationEventPublisher publisher;
 
   @GetMapping
-  public String getAll(Model model) throws CarException {
+  public String getAll(Model model) throws CarAlreadyExistsException {
     Response response = new Response();
     response.put(ResponseKeys.CAR_LIST, carService.getAllCars());
     model.addAttribute("result", response);
-    //throw new CarAlreadyExistsException();
     return "cars-list";
   }
 

@@ -9,42 +9,37 @@ import com.carrental.exception.MaintenanceNotFoundException;
 import com.carrental.exception.handlers.utils.ExceptionHandlerUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.context.request.WebRequest;
-import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+import org.springframework.web.servlet.ModelAndView;
 
 @ControllerAdvice(basePackages = {"com.carrental.controller"})
-public class MaintenanceExceptionsHandler extends ResponseEntityExceptionHandler {
+public class MaintenanceExceptionsHandler {
 
   @Autowired
   private ExceptionHandlerUtil utils;
 
   @ExceptionHandler(MaintenanceException.class)
-  protected ResponseEntity handleExceptions(MaintenanceException ex, WebRequest request) {
+  protected ModelAndView handleExceptions(MaintenanceException ex) {
     Response response = new Response(Status.MAINTENANCE_ERROR);
-    return utils.create(ex, request, response);
+    return utils.create(ex, response);
   }
 
   @ExceptionHandler(MaintenanceAlreadyExistsException.class)
-  protected ResponseEntity handleExistsExceptions(MaintenanceAlreadyExistsException ex,
-      WebRequest request) {
+  protected ModelAndView handleExistsExceptions(MaintenanceAlreadyExistsException ex) {
     Response response = new Response(Status.MAINTENANCE_EXISTS);
-    return utils.create(ex, request, response);
+    return utils.create(ex, response);
   }
 
   @ExceptionHandler(MaintenanceNotFoundException.class)
-  protected ResponseEntity handleNotFoundExceptions(MaintenanceNotFoundException ex,
-      WebRequest request) {
+  protected ModelAndView handleNotFoundExceptions(MaintenanceNotFoundException ex) {
     Response response = new Response(Status.MAINTENANCE_NOT_FOUND);
-    return utils.create(ex, request, response);
+    return utils.create(ex, response);
   }
 
   @ExceptionHandler(MaintenanceInvalidException.class)
-  protected ResponseEntity handleWrongExceptions(MaintenanceInvalidException ex,
-      WebRequest request) {
+  protected ModelAndView handleWrongExceptions(MaintenanceInvalidException ex) {
     Response response = new Response(Status.MAINTENANCE_WRONG);
-    return utils.create(ex, request, response);
+    return utils.create(ex, response);
   }
 }

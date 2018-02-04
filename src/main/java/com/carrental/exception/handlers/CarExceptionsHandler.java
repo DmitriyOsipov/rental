@@ -8,34 +8,31 @@ import com.carrental.exception.CarNotFoundException;
 import com.carrental.exception.handlers.utils.ExceptionHandlerUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.context.request.WebRequest;
-import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+import org.springframework.web.servlet.ModelAndView;
 
 @ControllerAdvice(basePackages = {"com.carrental.controller"})
-public class CarExceptionsHandler extends ResponseEntityExceptionHandler {
+public class CarExceptionsHandler {
 
   @Autowired
   private ExceptionHandlerUtil utils;
 
   @ExceptionHandler(CarException.class)
-  protected ResponseEntity handleCarExceptions(CarException ex, WebRequest request) {
+  protected ModelAndView handleCarExceptions(CarException ex) {
     Response response = new Response(Status.CAR_ERROR);
-    return utils.create(ex, request, response);
+    return utils.create(ex, response);
   }
 
   @ExceptionHandler(CarAlreadyExistsException.class)
-  protected ResponseEntity handleExistsExceptions(CarAlreadyExistsException ex,
-      WebRequest request) {
+  protected ModelAndView handleExistsExceptions(CarAlreadyExistsException ex) {
     Response response = new Response(Status.CAR_EXISTS);
-    return utils.create(ex, request, response);
+    return utils.create(ex, response);
   }
 
   @ExceptionHandler(CarNotFoundException.class)
-  protected ResponseEntity handleNotFoundExceptions(CarNotFoundException ex, WebRequest request) {
+  protected ModelAndView handleNotFoundExceptions(CarNotFoundException ex) {
     Response response = new Response(Status.CAR_NOT_FOUND);
-    return utils.create(ex, request, response);
+    return utils.create(ex, response);
   }
 }

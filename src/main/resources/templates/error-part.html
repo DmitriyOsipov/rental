@@ -1,33 +1,42 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-
+<head th:include="template-head-part::head-part">
+</head>
 <body>
-  <div class="error-block" th:fragment="error-block">
-    <p class="error-header">
-      An error occured during this operation.
-    </p>
-    <table class="error-table" th:with="status=${result.get(T(com.carrental.domain.ResponseKeys).STATUS)}">
-      <tr>
-        <td class="error-label">Status code</td>
-        <td class="error-value" th:text="${status.code}">
-        </td>
-      </tr>
-      <tr>
-        <td class="error-label">Status message</td>
-        <td class="error-value" th:text="${status.message}">
-        </td>
-      </tr>
-      <tr>
-        <td class="error-label">Exception type</td>
-        <td class="error-value" th:text="${result.get(T(com.carrental.domain.ResponseKeys).EXCEPTION_TYPE}">
-        </td>
-      </tr>
-      <tr>
-        <td class="error-label">Exception message</td>
-        <td class="error-value" th:text="${result.get(T(com.carrental.domain.ResponseKeys).EXCEPTION_MESSAGE}">
-        </td>
-      </tr>
-    </table>
-  </div>
+<div class="grid-container">
+  <p th:include="top-bot-menu-part::tmb-part"></p>
+  <section class="mainSect">
+    <div class="error-block" th:fragment="error-block">
+      <p class="error-header">
+        An error occured during this operation.
+      </p>
+      <table class="error-table"
+             th:with="status=${result.get(T(com.carrental.domain.ResponseKeys).STATUS)}">
+        <tr>
+          <td class="error-label">Status code</td>
+          <td class="error-value" th:text="${status.code}">
+          </td>
+        </tr>
+        <tr>
+          <td class="error-label">Status message</td>
+          <td class="error-value" th:text="${status.message}">
+          </td>
+        </tr>
+        <tr>
+          <td class="error-label">Exception type</td>
+          <td class="error-value"
+              th:text="${result.get(T(com.carrental.domain.ResponseKeys).EXCEPTION_TYPE)}">
+          </td>
+        </tr>
+        <tr>
+          <td class="error-label">Exception message</td>
+          <td class="error-value"
+              th:text="${result.get(T(com.carrental.domain.ResponseKeys).EXCEPTION_MESSAGE)}">
+          </td>
+        </tr>
+      </table>
+    </div>
+  </section>
+</div>
 </body>
 </html>

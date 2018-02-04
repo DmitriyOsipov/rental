@@ -8,34 +8,31 @@ import com.carrental.exception.ContactNotFoundException;
 import com.carrental.exception.handlers.utils.ExceptionHandlerUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.context.request.WebRequest;
-import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+import org.springframework.web.servlet.ModelAndView;
 
 @ControllerAdvice(basePackages = {"com.carrental.controller"})
-public class ContactExceptionsHandler extends ResponseEntityExceptionHandler {
+public class ContactExceptionsHandler {
 
   @Autowired
   private ExceptionHandlerUtil utils;
 
   @ExceptionHandler(ContactException.class)
-  protected ResponseEntity handleContactExceptions(ContactException ex, WebRequest request) {
+  protected ModelAndView handleContactExceptions(ContactException ex) {
     Response response = new Response(Status.CONTACT_ERROR);
-    return utils.create(ex, request, response);
+    return utils.create(ex, response);
   }
 
   @ExceptionHandler(ContactAlreadyExistsException.class)
-  protected ResponseEntity handleExistsExceptions(ContactAlreadyExistsException ex,
-      WebRequest request) {
+  protected ModelAndView handleExistsExceptions(ContactAlreadyExistsException ex) {
     Response response = new Response(Status.CONTACT_EXISTS);
-    return utils.create(ex, request, response);
+    return utils.create(ex, response);
   }
 
   @ExceptionHandler(ContactNotFoundException.class)
-  protected ResponseEntity handleExceptions(ContactNotFoundException ex, WebRequest request) {
+  protected ModelAndView handleExceptions(ContactNotFoundException ex) {
     Response response = new Response(Status.CONTACT_NOT_FOUND);
-    return utils.create(ex, request, response);
+    return utils.create(ex, response);
   }
 }

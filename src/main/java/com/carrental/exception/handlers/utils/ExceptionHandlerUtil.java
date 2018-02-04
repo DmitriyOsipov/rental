@@ -3,21 +3,19 @@ package com.carrental.exception.handlers.utils;
 import com.carrental.domain.Response;
 import com.carrental.domain.ResponseKeys;
 
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
-import org.springframework.web.context.request.WebRequest;
-import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+import org.springframework.web.servlet.ModelAndView;
 
 @Component
-public class ExceptionHandlerUtil extends ResponseEntityExceptionHandler {
+public class ExceptionHandlerUtil {
 
-  public ResponseEntity create(Exception exception, WebRequest req, Response response) {
+  public ModelAndView create(Exception exception, Response response) {
     response.put(ResponseKeys.EXCEPTION_TYPE, exception.getClass());
     response.put(ResponseKeys.EXCEPTION_MESSAGE, exception.getMessage());
-    HttpHeaders headers = new HttpHeaders();
-    //headers.setContentType(MediaType.APPLICATION_JSON);
-    return handleExceptionInternal(exception, response, headers, HttpStatus.OK, req);
+
+    ModelAndView mav = new ModelAndView();
+    mav.addObject("result", response);
+    mav.setViewName("error-part");
+    return mav;
   }
 }
