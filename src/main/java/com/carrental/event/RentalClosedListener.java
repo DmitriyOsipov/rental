@@ -29,8 +29,8 @@ public class RentalClosedListener {
     car.setMileage(event.getEndMileage());
     if (car.getMileage() - car.getLastMaintenance() >= 50_000) {
       maintenanceService.addMaintenance(new Maintenance(car, MaintenanceStatus.SCHEDULED));
+      car.setLastMaintenance(car.getLastMaintenance() + 50_000);
     }
-    car.setLastMaintenance(car.getLastMaintenance() + 50_000);
     carService.updateCar(car);
   }
 }

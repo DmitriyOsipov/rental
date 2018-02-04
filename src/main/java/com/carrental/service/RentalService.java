@@ -1,6 +1,7 @@
 package com.carrental.service;
 
 import com.carrental.event.RentalClosedEvent;
+import com.carrental.event.RentalCreatedEvent;
 import com.carrental.exception.RentalAlreadyExistsException;
 import com.carrental.exception.RentalException;
 import com.carrental.exception.RentalInvalidException;
@@ -24,19 +25,13 @@ public class RentalService {
   private RentalRepository rentalRepository;
 
   @Autowired
-  private MaintenanceService maintenanceService;
-
-  @Autowired
   private ApplicationEventPublisher publisher;
 
   public Rental addRental(Rental newRental) throws RentalException {
     if (rentalRepository.exists(newRental.getId())) {
       throw new RentalAlreadyExistsException();
     }
-    newRental.setEndMileage(0);
-    if (maintenanceService.hasUnfinishedMaintenance(newRental.getCar())) {
-      throw new RentalInvalidException("This car is under maintenance!");
-    }
+    publisher.publishEvent(new RentalCreatedEvent(newRental, newRental.getCar().getId()));
     return new Rental(rentalRepository.save(newRental));
   }
 
@@ -124,7 +119,7 @@ public class RentalService {
     if (rental == null) {
       throw new RentalNotFoundException();
     }
-    if (rental.getStartMileage() <= endMileage) {
+    if (rental.getStartMileage() >= endMileage) {
       throw new RentalException("Wrong end mileage value!");
     }
     rental.setEndMileage(endMileage);

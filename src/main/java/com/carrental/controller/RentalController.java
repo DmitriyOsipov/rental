@@ -4,12 +4,17 @@ import com.carrental.domain.Response;
 import com.carrental.domain.ResponseKeys;
 import com.carrental.exception.RentalException;
 import com.carrental.model.Rental;
+import com.carrental.service.CarService;
+import com.carrental.service.ContactService;
 import com.carrental.service.RentalService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,6 +28,12 @@ public class RentalController {
 
   @Autowired
   private RentalService rentalService;
+
+  @Autowired
+  private CarService carService;
+
+  @Autowired
+  private ContactService contactService;
 
   @RequestMapping(method = RequestMethod.GET)
   public String getAll(Model model) {
@@ -45,11 +56,21 @@ public class RentalController {
     return "rental-page";
   }
 
-  @RequestMapping("/add")
-  public String addNew(Model model, @RequestBody Rental toAdd) throws RentalException {
+  @PostMapping("/new")
+  public String addNew(Model model, @ModelAttribute Rental toAdd) throws RentalException {
     Rental added = rentalService.addRental(toAdd);
     model.addAttribute("result", new Response(ResponseKeys.RENTAL, added));
-    return "redirect:rentals/".concat(String.valueOf(added.getId()));
+    return "redirect:/rentals/".concat(String.valueOf(added.getId()));
+  }
+
+  @GetMapping("/new")
+  public String forNewRental(Model model) {
+    Response response = new Response();
+    response.put(ResponseKeys.CAR_LIST, carService.getFreeCars());
+    response.put(ResponseKeys.CONTACT_LIST, contactService.getAll());
+    model.addAttribute("result", response);
+    model.addAttribute(new Rental());
+    return "rental-new";
   }
 
   @RequestMapping(value = "/update", method = RequestMethod.POST)
@@ -61,11 +82,11 @@ public class RentalController {
     return "redirect:/rentals/".concat(String.valueOf(updated.getId()));
   }
 
-  @RequestMapping(value = "/close", method = RequestMethod.POST)
+  @PostMapping("/close")
   public String closeRental(Model model, @RequestParam(name = "id") long id,
-      @RequestParam(name = "endMile") int endMile) throws RentalException {
+      @RequestParam(name = "endMileage") int endMileage) throws RentalException {
     model.addAttribute("result",
-        new Response(ResponseKeys.RENTAL, rentalService.closeRental(id, endMile)));
-    return "rentals-list";
+        new Response(ResponseKeys.RENTAL, rentalService.closeRental(id, endMileage)));
+    return "redirect:/rentals";
   }
 }

@@ -50,25 +50,27 @@ public class Rental {
   private int endMileage;
 
   public Rental() {
+    startDate = LocalDate.now();
   }
 
-  private Rental(Car car, double price, LocalDate startDate, LocalDate endDate, int startMileage) {
+  private Rental(Car car, double price, LocalDate startDate, LocalDate endDate) {
+    this();
     this.car = car;
     this.price = price;
     this.startDate = startDate;
     this.endDate = endDate;
-    this.startMileage = startMileage;
+    this.startMileage = car.getMileage();
   }
 
   public Rental(Car car, Contact client, double price, LocalDate startDate,
       LocalDate endDate, int startMileage) {
-    this(car, price, startDate, endDate, startMileage);
+    this(car, price, startDate, endDate);
     this.client = client;
   }
 
   public Rental(Car car, String contactInfo, double price, LocalDate startDate,
-      LocalDate endDate, int startMileage) {
-    this(car, price, startDate, endDate, startMileage);
+      LocalDate endDate) {
+    this(car, price, startDate, endDate);
     this.contactInfo = contactInfo;
   }
 

@@ -70,4 +70,8 @@ public class ContactService {
     }
     return found;
   }
+
+  public boolean isExisted(long id) {
+    return repository.exists(id);
+  }
 }
