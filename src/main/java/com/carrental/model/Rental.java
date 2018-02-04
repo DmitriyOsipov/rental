@@ -1,6 +1,7 @@
 package com.carrental.model;
 
 import org.springframework.beans.BeanUtils;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.util.Objects;
@@ -35,9 +36,11 @@ public class Rental {
   private double price;
 
   @Column(name = "start_date")
+  @DateTimeFormat(pattern = "yyyy-MM-dd")
   private LocalDate startDate;
 
   @Column(name = "end_date")
+  @DateTimeFormat(pattern = "yyyy-MM-dd")
   private LocalDate endDate;
 
   @Column(name = "start_mileage")

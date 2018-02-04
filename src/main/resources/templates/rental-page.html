@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="template-head-part::head-part">
+</head>
+<body>
+<div class="grid-container">
+  <p th:include="top-bot-menu-part::tmb-part"></p>
+  <section class="mainSect">
+    <div class="rental-renform"
+         th:with="rental=${result.get(T(com.carrental.domain.ResponseKeys).RENTAL)}">
+      <p class="section-title">Rental data</p>
+      <form action="#" th:action="@{/rentals/update}" th:object="${rental}" th:method="post"
+            class="update-item-form">
+        <input type="hidden" th:field="*{id}" name="id"/>
+        <input type="hidden" th:field="*{car.id}" name="car.id"/>
+        <input type="hidden" th:field="*{client.id}" name="client.id" th:if="*{client != null}"/>
+        <table class="item-form-table">
+          <tr>
+            <td class="item-form-table-lbl">Car</td>
+            <td class="item-form-table-value">
+              <input type="text" th:value="*{car.type}" readonly="readonly"/>
+            </td>
+          </tr>
+          <tr>
+            <td class="item-form-table-lbl">Client</td>
+            <td class="item-form-table-value">
+              <p th:text="*{client.name}" th:if="*{client != null}"></p>
+              <input type="text" th:field="${rental.contactInfo}" th:if="${rental.client == null}" name="contactInfo"/>
+            </td>
+          </tr>
+          <tr>
+            <td class="item-form-table-lbl">Start date</td>
+            <td class="item-form-table-value">
+              <input type="date" th:field="*{startDate}" name="startDate"/>
+            </td>
+          </tr>
+          <tr>
+            <td class="item-form-table-lbl">End date</td>
+            <td class="item-form-table-value">
+              <input type="date" th:field="*{endDate}" name="endDate"/>
+            </td>
+          </tr>
+          <tr>
+            <td class="item-form-table-lbl">Start mileage</td>
+            <td class="item-form-table-value">
+              <input type="number" min="0.00" th:field="*{startMileage}" name="startMileage" step=".01"/>
+            </td>
+          </tr>
+          <tr>
+            <td class="item-form-table-lbl">End mileage</td>
+            <td class="item-form-table-value">
+              <input type="number" min="0.00" th:field="*{endMileage}" name="endMileage" step=".01"/>
+            </td>
+          </tr>
+          <tr>
+            <td class="item-form-table-lbl">Price</td>
+            <td class="item-form-table-value">
+              <input type="number" min="0.00" th:field="*{price}" name="price" step=".01"/>
+            </td>
+          </tr>
+          <tr>
+            <td class="item-form-table-btn">
+              <input type="submit" value="Update"/>
+            </td>
+          </tr>
+        </table>
+      </form>
+    </div>
+  </section>
+</div>
+</body>
+</html>

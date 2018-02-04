@@ -15,3 +15,4 @@ INSERT INTO rentals (id, car_id, client_id, contact_info, price, start_date, end
 INSERT INTO rentals (id, car_id, client_id, contact_info, price, start_date, end_date, start_mileage, end_mileage) VALUES (2, 2, 3, null, 700, '2017-12-15', '2018-01-05', 50010, 51000);
 INSERT INTO rentals (id, car_id, client_id, contact_info, price, start_date, end_date, start_mileage, end_mileage) VALUES (3, 4, 3, null, 500, '2017-11-01', '2017-12-15', 130000, 149500);
 INSERT INTO rentals (id, car_id, client_id, contact_info, price, start_date, end_date, start_mileage, end_mileage) VALUES (4, 5, 2, null, 1000, '2018-01-01', '2018-01-10', 10, 500);
+INSERT INTO rentals (id, car_id, client_id, contact_info, price, start_date, end_date, start_mileage, end_mileage) VALUES (5, 3, 2, null, 1000, '2017-10-01', NULL, 10, 500);

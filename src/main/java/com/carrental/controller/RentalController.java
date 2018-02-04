@@ -37,7 +37,9 @@ public class RentalController {
 
   @RequestMapping("/{id}")
   public String get(Model model, @PathVariable long id) throws RentalException {
-    model.addAttribute("result", new Response(ResponseKeys.RENTAL, rentalService.getRental(id)));
+    Rental rental = rentalService.getRental(id);
+    model.addAttribute("result", new Response(ResponseKeys.RENTAL, rental));
+    model.addAttribute(rental);
     return "rental-page";
   }
 

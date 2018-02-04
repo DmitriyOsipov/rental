@@ -11,13 +11,15 @@ import java.util.List;
 
 public interface RentalRepository extends JpaRepository<Rental, Long> {
 
-  List<Rental> findAllByCar(Car car);
+  List<Rental> findAllByCarOrderByStartDateDesc(Car car);
 
-  List<Rental> findAllByContactInfoLike(String contactInfo);
+  List<Rental> findAllByContactInfoLikeOrderByStartDateDesc(String contactInfo);
 
-  List<Rental> findAllByClient(Contact client);
+  List<Rental> findAllByClientOrderByStartDateDesc(Contact client);
 
-  List<Rental> findAllByStartDateBeforeAndEndDateAfter(LocalDate start, LocalDate end);
+  List<Rental> findAllByStartDateBeforeAndEndDateAfterOrEndDateIsNull(LocalDate start, LocalDate end);
 
-  Rental findFirstByCarAndStartDateBeforeAndEndDateAfter(Car car, LocalDate start, LocalDate end);
+  Rental findFirstByCarAndStartDateBeforeAndEndDateAfterOrEndDateIsNull(Car car, LocalDate start, LocalDate end);
+
+  List<Rental> findAllByOrderByStartDateDesc();
 }

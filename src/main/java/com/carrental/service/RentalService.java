@@ -62,28 +62,30 @@ public class RentalService {
 
   public List<Rental> getCurrentRentals() {
     return rentalRepository
-        .findAllByStartDateBeforeAndEndDateAfter(LocalDate.now(), LocalDate.now());
+        .findAllByStartDateBeforeAndEndDateAfterOrEndDateIsNull(LocalDate.now(), LocalDate.now());
   }
 
   public Rental getCurrentRental(Car car) {
     return rentalRepository
-        .findFirstByCarAndStartDateBeforeAndEndDateAfter(car, LocalDate.now(), LocalDate.now());
+        .findFirstByCarAndStartDateBeforeAndEndDateAfterOrEndDateIsNull(car, LocalDate.now(),
+            LocalDate.now());
   }
 
   public List<Rental> getCarRentals(Car car) {
-    return rentalRepository.findAllByCar(car);
+    return rentalRepository.findAllByCarOrderByStartDateDesc(car);
   }
 
   public List<Rental> getAll() {
-    return rentalRepository.findAll();
+    //return rentalRepository.findAll();
+    return rentalRepository.findAllByOrderByStartDateDesc();
   }
 
   public List<Rental> getClientRentals(Contact client) {
-    return rentalRepository.findAllByClient(client);
+    return rentalRepository.findAllByClientOrderByStartDateDesc(client);
   }
 
   public List<Rental> getClientRentals(String contactInfo) {
-    return rentalRepository.findAllByContactInfoLike(contactInfo);
+    return rentalRepository.findAllByContactInfoLikeOrderByStartDateDesc(contactInfo);
   }
 
   public List<Rental> updateRentalsForClientRemove(Contact client) {
