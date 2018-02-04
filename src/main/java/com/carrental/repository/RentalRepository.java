@@ -17,9 +17,11 @@ public interface RentalRepository extends JpaRepository<Rental, Long> {
 
   List<Rental> findAllByClientOrderByStartDateDesc(Contact client);
 
-  List<Rental> findAllByStartDateBeforeAndEndDateAfterOrEndDateIsNull(LocalDate start, LocalDate end);
+  List<Rental> findAllByStartDateBeforeAndEndDateAfterOrEndDateIsNullOrEndMileage(LocalDate start,
+      LocalDate end, int endMile);
 
-  Rental findFirstByCarAndStartDateBeforeAndEndDateAfterOrEndDateIsNull(Car car, LocalDate start, LocalDate end);
+  Rental findFirstByCarAndStartDateBeforeAndEndDateAfterOrEndDateIsNullOrEndMileage(Car car,
+      LocalDate start, LocalDate end, int endMile);
 
   List<Rental> findAllByOrderByStartDateDesc();
 }

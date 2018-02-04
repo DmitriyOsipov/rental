@@ -47,6 +47,27 @@ public class RentalService {
     return new Rental(rentalRepository.save(updated));
   }
 
+  public Rental updateRental(long id, LocalDate startDate, LocalDate endDate, double price)
+      throws RentalException {
+    if (startDate.compareTo(endDate) > 0) {
+      throw new RentalInvalidException("End date should be after start date");
+    }
+    if (price < 0) {
+      throw new RentalInvalidException("Price should be positive");
+    }
+    Rental inDb = rentalRepository.getOne(id);
+    if (inDb == null) {
+      throw new RentalNotFoundException();
+    }
+    if (inDb.getEndMileage() > 0) {
+      throw new RentalInvalidException("Rental is already closed!");
+    }
+    inDb.setStartDate(startDate);
+    inDb.setEndDate(endDate);
+    inDb.setPrice(price);
+    return rentalRepository.save(inDb);
+  }
+
   public boolean deleteRental(long id) {
     rentalRepository.delete(id);
     return !rentalRepository.exists(id);
@@ -62,13 +83,15 @@ public class RentalService {
 
   public List<Rental> getCurrentRentals() {
     return rentalRepository
-        .findAllByStartDateBeforeAndEndDateAfterOrEndDateIsNull(LocalDate.now(), LocalDate.now());
+        .findAllByStartDateBeforeAndEndDateAfterOrEndDateIsNullOrEndMileage(LocalDate.now(),
+            LocalDate.now(), 0);
   }
 
   public Rental getCurrentRental(Car car) {
     return rentalRepository
-        .findFirstByCarAndStartDateBeforeAndEndDateAfterOrEndDateIsNull(car, LocalDate.now(),
-            LocalDate.now());
+        .findFirstByCarAndStartDateBeforeAndEndDateAfterOrEndDateIsNullOrEndMileage(car,
+            LocalDate.now(),
+            LocalDate.now(), 0);
   }
 
   public List<Rental> getCarRentals(Car car) {
@@ -76,7 +99,6 @@ public class RentalService {
   }
 
   public List<Rental> getAll() {
-    //return rentalRepository.findAll();
     return rentalRepository.findAllByOrderByStartDateDesc();
   }
 

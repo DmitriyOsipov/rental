@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.time.LocalDate;
+
 @Controller
 @RequestMapping("/rentals")
 public class RentalController {
@@ -47,24 +49,19 @@ public class RentalController {
   public String addNew(Model model, @RequestBody Rental toAdd) throws RentalException {
     Rental added = rentalService.addRental(toAdd);
     model.addAttribute("result", new Response(ResponseKeys.RENTAL, added));
-    return "rentals/".concat(String.valueOf(added.getId()));
+    return "redirect:rentals/".concat(String.valueOf(added.getId()));
   }
 
-  @RequestMapping(value = "/update", method = RequestMethod.PUT)
-  public String update(Model model, @RequestBody Rental rental) throws RentalException {
-    Rental updated = rentalService.updateRental(rental);
+  @RequestMapping(value = "/update", method = RequestMethod.POST)
+  public String update(Model model, @RequestParam("id") long id, @RequestParam("dateStart")
+      LocalDate dateStart, @RequestParam("dateEnd") LocalDate dateEnd,
+      @RequestParam("price") double price) throws RentalException {
+    Rental updated = rentalService.updateRental(id, dateStart, dateEnd, price);
     model.addAttribute("result", new Response(ResponseKeys.RENTAL, updated));
     return "redirect:/rentals/".concat(String.valueOf(updated.getId()));
   }
 
-  @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
-  public String delete(Model model, @PathVariable long id) throws RentalException {
-    model.addAttribute("result",
-        new Response(ResponseKeys.RENTAL_DELETED, rentalService.deleteRental(id)));
-    return "redirect:/rentals";
-  }
-
-  @RequestMapping(value = "/close", method = RequestMethod.PUT)
+  @RequestMapping(value = "/close", method = RequestMethod.POST)
   public String closeRental(Model model, @RequestParam(name = "id") long id,
       @RequestParam(name = "endMile") int endMile) throws RentalException {
     model.addAttribute("result",
