@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -102,8 +101,8 @@ public class CarController {
    * @throws CarException can throw CarNotFoundException if car with signed id doesn't exist in the
    * db
    */
-  @RequestMapping(value = "/update", method = RequestMethod.PUT)
-  public String update(Model model, @RequestBody Car car) throws CarException {
+  @RequestMapping(value = "/update", method = RequestMethod.POST)
+  public String update(Model model, @ModelAttribute Car car) throws CarException {
     Car updated = carService.updateCar(car);
     model.addAttribute("result", new Response(ResponseKeys.CAR, updated));
     model.addAttribute("car", updated);

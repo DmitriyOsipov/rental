@@ -30,13 +30,24 @@ public class CarService {
     if (repository.exists(newCar.getId())) {
       throw new CarAlreadyExistsException();
     }
+    checkMaintenance(newCar);
     return new Car(repository.save(newCar));
+  }
+
+  private void checkMaintenance(Car car) {
+    while (car.getMileage() < car.getLastMaintenance() && car.getLastMaintenance() > 0) {
+      car.setLastMaintenance(car.getLastMaintenance() - 50_000);
+    }
+    if (car.getLastMaintenance() < 0) {
+      car.setLastMaintenance(0);
+    }
   }
 
   public Car updateCar(Car updated) throws CarException {
     if (!repository.exists(updated.getId())) {
       throw new CarNotFoundException();
     }
+    checkMaintenance(updated);
     return new Car(repository.save(updated));
   }
 

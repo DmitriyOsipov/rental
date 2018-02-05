@@ -174,8 +174,25 @@ public class ContactController {
   public String addContact(Model model, @ModelAttribute("contact") Contact contact)
       throws ContactException {
     Contact added = contactService.add(contact);
-    model.addAttribute("result", new Response(ResponseKeys.CONTACT, contact));
+    model.addAttribute("result", new Response(ResponseKeys.CONTACT, added));
     model.addAttribute("contact", added);
+    return "redirect:/contacts";
+  }
+
+  /**
+   * updating contacts from the input data
+   *
+   * @param model - std object
+   * @param contact - a contact object, got from contact-page template
+   * @return an added contact and redirects into @getAll()
+   * @throws ContactException can throw ContactNotFoundException or a custom ContactException
+   */
+  @RequestMapping(value = "/update", method = RequestMethod.POST)
+  public String updateContact(Model model, @ModelAttribute("contact") Contact contact)
+      throws ContactException {
+    Contact updated = contactService.update(contact);
+    model.addAttribute("result", new Response(ResponseKeys.CONTACT, updated));
+    model.addAttribute("contact", updated);
     return "redirect:/contacts";
   }
 }
