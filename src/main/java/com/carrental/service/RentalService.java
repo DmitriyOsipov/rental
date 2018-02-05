@@ -78,15 +78,12 @@ public class RentalService {
 
   public List<Rental> getCurrentRentals() {
     return rentalRepository
-        .findAllByStartDateBeforeAndEndDateAfterOrEndDateIsNullOrEndMileage(LocalDate.now(),
-            LocalDate.now(), 0);
+        .findAllByEndMileage(0);
   }
 
   public Rental getCurrentRental(Car car) {
     return rentalRepository
-        .findFirstByCarAndStartDateBeforeAndEndDateAfterOrEndDateIsNullOrEndMileage(car,
-            LocalDate.now(),
-            LocalDate.now(), 0);
+        .findFirstByCarAndEndMileage(car,0);
   }
 
   public List<Rental> getCarRentals(Car car) {
@@ -121,6 +118,10 @@ public class RentalService {
     }
     if (rental.getStartMileage() >= endMileage) {
       throw new RentalException("Wrong end mileage value!");
+    }
+    if ((rental.getEndDate() == null) ||
+        (rental.getStartDate().compareTo(rental.getEndDate())) > 0) {
+      rental.setEndDate(LocalDate.now());
     }
     rental.setEndMileage(endMileage);
     Rental closed = new Rental(rentalRepository.save(rental));
