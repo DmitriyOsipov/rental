@@ -22,14 +22,14 @@
           <td class="error-value" th:text="${status.message}">
           </td>
         </tr>
-        <tr>
+        <!--<tr>>
           <td class="error-label">Exception type</td>
           <td class="error-value"
               th:text="${result.get(T(com.carrental.domain.ResponseKeys).EXCEPTION_TYPE)}">
           </td>
-        </tr>
+        </tr-->
         <tr>
-          <td class="error-label">Exception message</td>
+          <td class="error-label">Details</td>
           <td class="error-value"
               th:text="${result.get(T(com.carrental.domain.ResponseKeys).EXCEPTION_MESSAGE)}">
           </td>
