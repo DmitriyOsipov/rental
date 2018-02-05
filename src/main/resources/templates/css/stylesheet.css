@@ -1,6 +1,5 @@
 body, html {
   font-size: 10px;
-  background-color: aliceblue;
 }
 
 body {
@@ -25,7 +24,6 @@ td {
 #headText {
 	font-size: 3rem;
   font-style: oblique;
-	color: steelblue;
 	text-align: center;
 }
 
@@ -36,11 +34,9 @@ td {
 
 .menu a {
   text-decoration: none;
-  color: black;
 }
 
 .menu li:hover {
-  background-color: steelblue;
   text-align: center;
 }
 
@@ -153,11 +149,10 @@ td {
 .error-header {
   text-align: center;
   font-size: 2.5rem;
-  color:darkred;
 }
 
 .error-table {
-  border: 0.1rem lightgray;
+  border: 0.1rem;
   border-collapse: collapse;
   align-content: left;
   alignment: center;
@@ -166,7 +161,7 @@ td {
   text-align:left;
 }
 .error-table td {
-  border: 0.1rem solid lightgray;
+  border: 0.1rem solid;
 }
 .error-label {
   font-weight: bold;
@@ -175,7 +170,6 @@ td {
 .no-data {
   text-align: center;
   font-size: 2rem;
-  color: darkred;
 }
 
 .items-div {
@@ -186,19 +180,18 @@ td {
 }
 
 .items-table {
-  border: 0.2rem lightgray;
+  border: 0.2rem;
   border-collapse: collapse;
   text-align: left;
   font-size: 2rem;
   margin: 0.2rem;
 }
 .items-table td {
-  border: 0.1rem solid lightgray;
+  border: 0.1rem solid;
   padding: 1rem;
 }
 .items-table-header {
   font-weight: bold;
-  background: lightsteelblue;
   text-align: center;
 }
 .items-table-item {
@@ -212,7 +205,6 @@ td {
 
 .section-title {
   font-size: 2.4rem;
-  color:steelblue;
 }
 
 .item-form-div {
@@ -241,23 +233,21 @@ td {
   width: 30rem;
   font-size: 1.5rem;
   padding: 0.5rem 0 0.5rem 1rem;
-  border: 0.1rem solid #cecece;
-  background: #e7f8fd;
+  border: 0.1rem solid;
   border-radius: 0.8rem;
 }
 
 .item-form-btn {
   cursor: pointer;
-  border: 1px solid #cecece;
-  background: #e7f8fd;
-  box-shadow: inset 0 2rem 2rem #ffffff;
+  border: 1px solid;
+  box-shadow: inset 0 2rem 2rem;
   border-radius: 0.8rem;
   padding: 0.5rem 1.5rem;
   width: 15rem;
   font-size: 1.5rem;
 }
 .item-form-btn:hover {
-  box-shadow: inset 0rem -2rem 2rem #ffffff;
+  box-shadow: inset 0rem -2rem 2rem;
 }
 .item-form-btn:active {
   margin-top: 1rem;
@@ -267,6 +257,5 @@ td {
 
 .maintenances-total {
   font-size: 2rem;
-  color: black;
   padding-bottom: 2rem;
 }

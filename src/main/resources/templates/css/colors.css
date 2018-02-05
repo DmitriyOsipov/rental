@@ -1,0 +1,54 @@
+body, html {
+  background-color: aliceblue;
+}
+#headText {
+	color: steelblue;
+}
+
+.menu a {
+  color: black;
+}
+
+.menu li:hover {
+  background-color: steelblue;
+}
+
+.error-header {
+  color:darkred;
+}
+
+.no-data {
+  color: darkred;
+}
+
+.items-table {
+  border-color: lightgray;
+}
+.items-table td {
+  border-color: lightgray;
+}
+.items-table-header {
+  background: lightsteelblue;
+}
+
+.section-title {
+  color:steelblue;
+}
+
+.item-form-input {
+  border-color:#cecece;
+  background: #e7f8fd;
+}
+
+.item-form-btn {
+  border: 1px solid #cecece;
+  background: #e7f8fd;
+  box-shadow: inset 0 2rem 2rem #ffffff;
+}
+.item-form-btn:hover {
+  box-shadow: inset 0rem -2rem 2rem #ffffff;
+}
+
+.maintenances-total {
+  color: black;
+}
