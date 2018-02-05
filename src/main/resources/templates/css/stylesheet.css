@@ -135,8 +135,9 @@ td {
 }
 
 .greet-text {
-  text-align: justify-all;
+  text-align: justify;
   font-size: 2rem;
+  padding-left: 5rem;
 }
 
 .error-block {

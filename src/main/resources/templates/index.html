@@ -6,9 +6,29 @@
 <div class="grid-container">
   <p th:include="top-bot-menu-part::tmb-part"></p>
   <section class="mainSect">
-    <p class="greet-text">
-      Hello! This is a simple example page.
-    </p>
+    <div class="greet-text">
+      <p>
+        This is a small (and study) application with Spring Boot, Hibernate, H2DB and Thymeleaf for
+        visual displaying. And it is first project where I used Thymeleaf, so it was interesting.
+      </p>
+      <p>This is some Car rental service, where you can do next things:</p>
+      <ul>
+        <li>add new cars, contacts (clients) or rentals;</li>
+        <li>delete every contact at the moment, even if there is unfinished rental with him. In this
+          case field contactInfo in rental object will be filled;
+        </li>
+        <li>watch all clients, cars, rentals or maintenances;</li>
+        <li>watch information about concrete car, client, rental or maintenance; On the car page you
+          also can see all it rentals and maintenances;
+        </li>
+        <li>watch current rentals (with end mileage "0") or maintenances (with status SCHEDULED or
+          IN_PROGRESS);
+        </li>
+        <li>close rentals;</li>
+        <li>change maintenance status or finish it;</li>
+      </ul>
+      <p>There is no authorization (there wasn't a task to do it).</p>
+    </div>
   </section>
 </div>
 </body>
