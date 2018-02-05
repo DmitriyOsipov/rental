@@ -6,49 +6,50 @@
 <div class="grid-container">
   <p th:include="top-bot-menu-part::tmb-part"></p>
   <section class="mainSect">
-    <div>
+    <div class="item-form-div">
+      <h1 class="section-title">New contact creation</h1>
       <form action="#" th:action="@{~/contacts/new}" th:object="${contact}" th:method="post"
-            class="new-item-form">
+            class="item-form">
         <input type="hidden" th:field="*{id}" value="0" name="id"/>
         <table class="item-form-table">
           <tr>
             <td class="item-form-table-lbl">Contact name</td>
             <td class="item-form-table-value">
-              <input type="text" th:field="*{name}" name="name"/>
+              <input type="text" th:field="*{name}" name="name" class="item-form-input"/>
             </td>
           </tr>
           <tr>
             <td class="item-form-table-lbl">Phone</td>
             <td class="item-form-table-value">
-              <input type="text" th:field="*{phone}" name="phone"/>
+              <input type="text" th:field="*{phone}" name="phone" class="item-form-input"/>
             </td>
           </tr>
           <tr>
             <td class="item-form-table-lbl">Email</td>
             <td class="item-form-table-value">
-              <input type="email" th:field="*{email}" name="email"/>
+              <input type="email" th:field="*{email}" name="email" class="item-form-input"/>
             </td>
           </tr>
           <tr>
             <td class="item-form-table-lbl">Birthday</td>
             <td class="item-form-table-value">
-              <input type="date" th:field="*{birthday}" name="birthday"/>
+              <input type="date" th:field="*{birthday}" name="birthday" class="item-form-input"/>
             </td>
           </tr>
           <tr>
             <td class="item-form-table-lbl">Note</td>
             <td class="item-form-table-value">
-              <input type="text" min="0" th:field="*{note}" name="note"/>
+              <input type="text" min="0" th:field="*{note}" name="note" class="item-form-input"/>
             </td>
           </tr>
           <tr>
-            <td class="item-form-table-btn">
-              <input type="submit" value="Add contact"/>
+            <td class="item-form-table-btn" colspan="2">
+              <input type="submit" value="Add contact" class="item-form-btn"/>
             </td>
           </tr>
           <tr>
-            <td class="item-form-table-btn">
-              <input type="reset" value="Reset"/>
+            <td class="item-form-table-btn" colspan="2">
+              <input type="reset" value="Reset" class="item-form-btn"/>
             </td>
           </tr>
         </table>

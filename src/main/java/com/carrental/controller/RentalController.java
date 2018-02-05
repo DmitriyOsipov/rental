@@ -74,10 +74,11 @@ public class RentalController {
   }
 
   @RequestMapping(value = "/update", method = RequestMethod.POST)
-  public String update(Model model, @RequestParam("id") long id, @RequestParam("dateStart")
-      LocalDate dateStart, @RequestParam("dateEnd") LocalDate dateEnd,
+  public String update(Model model, @RequestParam("id") long id, @RequestParam("startDate")
+      String startDate, @RequestParam("endDate") String endDate,
       @RequestParam("price") double price) throws RentalException {
-    Rental updated = rentalService.updateRental(id, dateStart, dateEnd, price);
+    Rental updated = rentalService
+        .updateRental(id, LocalDate.parse(startDate), LocalDate.parse(endDate), price);
     model.addAttribute("result", new Response(ResponseKeys.RENTAL, updated));
     return "redirect:/rentals/".concat(String.valueOf(updated.getId()));
   }

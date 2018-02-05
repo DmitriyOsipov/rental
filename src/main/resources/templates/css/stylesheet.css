@@ -1,6 +1,6 @@
 body, html {
   font-size: 10px;
-  background-color: linen;
+  background-color: aliceblue;
 }
 
 body {
@@ -25,7 +25,7 @@ td {
 #headText {
 	font-size: 3rem;
   font-style: oblique;
-	color: gold;
+	color: steelblue;
 	text-align: center;
 }
 
@@ -40,15 +40,12 @@ td {
 }
 
 .menu li:hover {
-  background-color: burlywood;
+  background-color: steelblue;
   text-align: center;
 }
 
-
-.warning {
-  font-size: 3rem;
-  color: darkred;
-  align-items: center;
+.submenu {
+  list-style-type: none;
 }
 
 .grid-container {
@@ -107,93 +104,7 @@ td {
   justify-content: center;
 }
 
-.booklistTitle {
-  font-size: 2rem;
-  color: brown;
-  font-style: italic;
-}
-
-.booksContainer {
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-}
-
-.bookItem {
-  margin: 1rem;
-  border: solid chocolate;
-  width: 20rem;
-  height: 20rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  justify-self: start;
-}
-
-.bookEntry {
-
-}
-
-.formContainer {
-  display: flex;
-  flex-direction: column;
-}
-
-.requestForm {
-  background-color: beige;
-  align-self: center;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-}
-
-.formEntry {
-  flex-direction: column;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.itemGreet {
-  border: inherit;
-  justify-self: center;
-  font-size: 2.5rem;
-}
-
-.oneBookItemContainer {
-  display: grid;
-  grid-template-columns:
-  /* 1 */ 25rem;
-  /* 2 */ 1fr;
-  grid-template-rows:
-  /* 1 */ 1fr;
-}
-
-.oneBookItem {
-  grid-column: 2;
-  grid-row: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  justify-self: flex-start;
-  flex-wrap: wrap;
-  text-align: left;
-}
-
-.oneBookItemEntry {
-  font-size: 2.4rem;
-}
-
-.bookImg {
-  grid-column: 1;
-  grid-row: 1;
-  width: 20rem;
-  height: 30rem;
-  content: "Book title";
-  margin-right: 3rem;
-}
-
-@media screen and (max-width:60rem){
+@media screen and (max-width:50rem){
   .grid-container{
     display: grid;
     grid-template-columns:
@@ -225,4 +136,137 @@ td {
     grid-column: 1;
     grid-row: 4;
   }
+}
+
+.greet-text {
+  text-align: justify-all;
+  font-size: 2rem;
+}
+
+.error-block {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.error-header {
+  text-align: center;
+  font-size: 2.5rem;
+  color:darkred;
+}
+
+.error-table {
+  border: 0.1rem lightgray;
+  border-collapse: collapse;
+  align-content: left;
+  alignment: center;
+  font-size: 2rem;
+  margin: 0.2rem;
+  text-align:left;
+}
+.error-table td {
+  border: 0.1rem solid lightgray;
+}
+.error-label {
+  font-weight: bold;
+}
+
+.no-data {
+  text-align: center;
+  font-size: 2rem;
+  color: darkred;
+}
+
+.items-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.items-table {
+  border: 0.2rem lightgray;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 2rem;
+  margin: 0.2rem;
+}
+.items-table td {
+  border: 0.1rem solid lightgray;
+  padding: 1rem;
+}
+.items-table-header {
+  font-weight: bold;
+  background: lightsteelblue;
+  text-align: center;
+}
+.items-table-item {
+
+}
+
+.img-arrow-link {
+  height: 2rem;
+  zoom: normal;
+}
+
+.section-title {
+  font-size: 2.4rem;
+  color:steelblue;
+}
+
+.item-form-div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.item-form-table {
+  padding: 2rem;
+  text-align: left;
+}
+.item-form-table td {
+  padding-bottom: 0.5rem;
+}
+
+.item-form-table-lbl {
+  font-style: oblique;
+  font-size: 2rem;
+}
+.item-form-table-btn {
+  padding-top: 1rem;
+  text-align: center;
+}
+
+.item-form-input {
+  width: 30rem;
+  font-size: 1.5rem;
+  padding: 0.5rem 0 0.5rem 1rem;
+  border: 0.1rem solid #cecece;
+  background: #e7f8fd;
+  border-radius: 0.8rem;
+}
+
+.item-form-btn {
+  cursor: pointer;
+  border: 1px solid #cecece;
+  background: #e7f8fd;
+  box-shadow: inset 0 2rem 2rem #ffffff;
+  border-radius: 0.8rem;
+  padding: 0.5rem 1.5rem;
+  width: 15rem;
+  font-size: 1.5rem;
+}
+.item-form-btn:hover {
+  box-shadow: inset 0rem -2rem 2rem #ffffff;
+}
+.item-form-btn:active {
+  margin-top: 1rem;
+  margin-bottom: -1rem;
+  zoom: 1;
+}
+
+.maintenances-total {
+  font-size: 2rem;
+  color: black;
+  padding-bottom: 2rem;
 }

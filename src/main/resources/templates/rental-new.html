@@ -6,9 +6,10 @@
 <div class="grid-container">
   <p th:include="top-bot-menu-part::tmb-part"></p>
   <section class="mainSect">
-    <div th:with="registered=true">
+    <div th:with="registered=true" class="items-div">
+      <h1 class="section-title">New rental creation</h1>
       <form action="#" th:action="@{/rentals/new}" th:object="${rental}" th:method="post"
-            class="new-item-form">
+            class="item-form">
         <input type="hidden" th:field="*{id}" value="0" name="id"/>
         <input type="hidden" th:field="*{endMileage}" value="0" name="endMileage"/>
         <input type="hidden" th:field="*{startMileage}" th:value="0"/>
@@ -16,7 +17,7 @@
           <tr>
             <td class="item-form-table-lbl">Car</td>
             <td class="item-form-table-value">
-              <select th:field="*{car.id}" name="car.id">
+              <select th:field="*{car.id}" name="car.id" class="item-form-input">
                 <option th:value="${carEnt.id}"
                         th:text="|${carEnt.type} (id:${carEnt.id})|"
                         th:each="carEnt : ${result.get(T(com.carrental.domain.ResponseKeys).CAR_LIST)}"></option>
@@ -26,7 +27,7 @@
           <tr>
             <td class="item-form-table-lbl">Client</td>
             <td class="item-form-table-value">
-              <select th:field="*{client.id}" name="client.id">
+              <select th:field="*{client.id}" name="client.id" class="item-form-input">
                 <option th:value="0">Client not registered</option>
                 <option th:value="${clientEnt.id}"
                         th:text="|${clientEnt.name} (${clientEnt.phone})|"
@@ -37,35 +38,35 @@
           <tr>
             <td class="item-form-table-lbl">Contact info</td>
             <td class="item-form-table-value">
-              <input type="text" th:field="*{contactInfo}" name="contactInfo" th:disabled="*{client.id !=0}"/>
+              <input type="text" th:field="*{contactInfo}" name="contactInfo" th:disabled="*{client.id !=0}" class="item-form-input"/>
             </td>
           </tr>
           <tr>
             <td class="item-form-table-lbl">Start date</td>
             <td class="item-form-table-value">
-              <input type="date" th:field="*{startDate}" name="startDate"/>
+              <input type="date" th:field="*{startDate}" name="startDate" class="item-form-input"/>
             </td>
           </tr>
           <tr>
             <td class="item-form-table-lbl">End date</td>
             <td class="item-form-table-value">
-              <input type="date" th:field="*{endDate}" name="endDate"/>
+              <input type="date" th:field="*{endDate}" name="endDate" class="item-form-input"/>
             </td>
           </tr>
           <tr>
             <td class="item-form-table-lbl">Price</td>
             <td class="item-form-table-value">
-              <input type="number" min="0.00" step=".01" th:field="*{price}" name="price"/>
+              <input type="number" min="0.00" step=".01" th:field="*{price}" name="price" class="item-form-input"/>
             </td>
           </tr>
           <tr>
-            <td class="item-form-table-btn">
-              <input type="submit" value="Submit"/>
+            <td class="item-form-table-btn" colspan="2">
+              <input type="submit" value="Create new rental" class="item-form-btn"/>
             </td>
           </tr>
           <tr>
-            <td class="item-form-table-btn">
-              <input type="reset" value="Reset"/>
+            <td class="item-form-table-btn" colspan="2">
+              <input type="reset" value="Reset" class="item-form-btn"/>
             </td>
           </tr>
         </table>

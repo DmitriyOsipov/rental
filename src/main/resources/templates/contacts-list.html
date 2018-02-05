@@ -7,7 +7,8 @@
   <p th:include="top-bot-menu-part::tmb-part"></p>
   <section class="mainSect">
     <div th:if="${result.get(T(com.carrental.domain.ResponseKeys).STATUS).code == 200}">
-      <div th:if="${not #lists.isEmpty(result.get(T(com.carrental.domain.ResponseKeys).CONTACT_LIST))}">
+      <div th:if="${not #lists.isEmpty(result.get(T(com.carrental.domain.ResponseKeys).CONTACT_LIST))}" class="items-div">
+        <h1 class="section-title">List of contacts</h1>
         <table class="items-table">
           <tr>
             <td class="items-table-header"></td>
@@ -19,7 +20,7 @@
           </tr>
           <tr th:each="contact : ${result.get(T(com.carrental.domain.ResponseKeys).CONTACT_LIST)}">
             <td class="items-table-item">
-              <a th:href="@{/contacts/{id}(id=${contact.id})}" class="car-link">
+              <a th:href="@{/contacts/{id}(id=${contact.id})}" class="contact-link">
                 <img th:src="@{/img/arrow.png}" class="img-arrow-link"/>
               </a></td>
             <td class="items-table-item" th:text="${contact.name}"></td>

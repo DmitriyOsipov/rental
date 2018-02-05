@@ -8,13 +8,14 @@
   <section class="mainSect">
     <div th:if="${result.get(T(com.carrental.domain.ResponseKeys).STATUS).code == 200}"
          th:fragment="maintenances-data">
+      <h1 class="section-title">List of maintenances</h1>
       <div class="maintenances-total"
            th:if="${result.get(T(com.carrental.domain.ResponseKeys).MAINTENANCE_TOTAL) != null}"
            th:text="|Total cost of maintenances is ${result.get(T(com.carrental.domain.ResponseKeys).MAINTENANCE_TOTAL)}|">
       </div>
       <div
           th:if="${not #lists.isEmpty(result.get(T(com.carrental.domain.ResponseKeys).MAINTENANCE_LIST))}"
-          class="maintenances-list">
+          class="items-div">
         <table class="items-table">
           <tr>
             <td class="items-table-header"></td>

@@ -6,43 +6,43 @@
 <div class="grid-container">
   <p th:include="top-bot-menu-part::tmb-part"></p>
   <section class="mainSect">
-    <div class="car-carform" th:with="car=${result.get(T(com.carrental.domain.ResponseKeys).CAR)}">
-      <p class="section-title">Car data</p>
-      <form action="#" th:action="@{/cars/update}" th:object="${car}" th:method="post" class="update-item-form">
+    <div class="item-form-div" th:with="car=${result.get(T(com.carrental.domain.ResponseKeys).CAR)}">
+      <h1 class="section-title">Car data</h1>
+      <form action="#" th:action="@{/cars/update}" th:object="${car}" th:method="post" class="item-form">
         <input type="hidden" th:field="*{id}" name="id"/>
         <table class="item-form-table">
           <tr>
             <td class="item-form-table-lbl">Car type</td>
             <td class="item-form-table-value">
-              <input type="text" th:field="*{type}" name="type"/>
+              <input type="text" th:field="*{type}" name="type" class="item-form-input"/>
             </td>
           </tr>
           <tr>
             <td class="item-form-table-lbl">Car mileage</td>
             <td class="item-form-table-value">
-              <input type="number" min="0" th:field="*{mileage}" name="mileage"/>
+              <input type="number" min="0" th:field="*{mileage}" name="mileage" class="item-form-input"/>
             </td>
           </tr>
           <tr>
             <td class="item-form-table-lbl">Last maintenance</td>
             <td class="item-form-table-value">
-              <input type="number" min="0" th:field="*{lastMaintenance}" name="lastMaintenance"/>
+              <input type="number" min="0" th:field="*{lastMaintenance}" name="lastMaintenance" class="item-form-input"/>
             </td>
           </tr>
           <tr>
-            <td class="item-form-table-btn">
-              <input type="submit" value="Submit" />
+            <td class="item-form-table-btn" colspan="2">
+              <input type="submit" value="Update"  class="item-form-btn"/>
             </td>
           </tr>
         </table>
       </form>
     </div>
     <div class="car-rentals">
-      <h1 class="car-rentals-header">Car rentals</h1>
+      <!--<h1 class="section-title">Car rentals</h1>-->
       <div th:include="rentals-list::rentals-data"></div>
     </div>
     <div class="car-maintenances">
-      <h1 class="car-maintenances-header">Car maintenances</h1>
+      <!--<h1 class="section-title">Car maintenances</h1>-->
       <div th:include="maintenances-list::maintenances-data"></div>
     </div>
   </section>

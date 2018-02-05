@@ -6,16 +6,17 @@
 <div class="grid-container">
   <p th:include="top-bot-menu-part::tmb-part"></p>
   <section class="mainSect">
-    <div class="rental-renform"
+    <div class="item-form-div"
          th:with="rental=${result.get(T(com.carrental.domain.ResponseKeys).RENTAL)}">
-      <p class="section-title">Rental data</p>
-      <form action="#" th:action="@{/rentals/update}" th:method="post" class="update-item-form">
+      <h1 class="section-title">Rental data</h1>
+      <form action="#" th:action="@{/rentals/update}" th:method="post" class="item-form">
         <input type="hidden" th:field="${rental.id}" name="id"/>
         <table class="item-form-table">
           <tr>
             <td class="item-form-table-lbl">Car</td>
             <td class="item-form-table-value">
-              <input type="text" th:value="${rental.car.type}" readonly="readonly"/>
+              <input type="text" th:value="${rental.car.type}" readonly="readonly"
+                     class="item-form-input"/>
             </td>
           </tr>
           <tr>
@@ -23,63 +24,66 @@
             <td class="item-form-table-value">
               <input type="text"
                      th:value="${(rental.client == null) ? rental.contactInfo : rental.client.name}"
-                     readonly="readonly"/>
+                     readonly="readonly" class="item-form-input"/>
             </td>
           </tr>
           <tr>
             <td class="item-form-table-lbl">Start date</td>
             <td class="item-form-table-value">
-              <input type="date" th:field="${rental.startDate}" name="startDate"/>
+              <input type="date" th:field="${rental.startDate}" name="startDate"
+                     class="item-form-input"/>
             </td>
           </tr>
           <tr>
             <td class="item-form-table-lbl">End date</td>
             <td class="item-form-table-value">
-              <input type="date" th:field="${rental.endDate}" name="endDate"/>
+              <input type="date" th:field="${rental.endDate}" name="endDate"
+                     class="item-form-input"/>
             </td>
           </tr>
           <tr>
             <td class="item-form-table-lbl">Start mileage</td>
             <td class="item-form-table-value">
               <input type="number" th:value="${rental.startMileage}" step=".01"
-                     readonly="readonly"/>
+                     readonly="readonly" class="item-form-input"/>
             </td>
           </tr>
           <tr>
             <td class="item-form-table-lbl">End mileage</td>
             <td class="item-form-table-value">
-              <input type="number" th:value="${rental.endMileage}" step=".01" readonly="readonly"/>
+              <input type="number" th:value="${rental.endMileage}" step=".01" readonly="readonly"
+                     class="item-form-input"/>
             </td>
           </tr>
           <tr>
             <td class="item-form-table-lbl">Price</td>
             <td class="item-form-table-value">
               <input type="number" min="0.00" th:field="${rental.price}" name="price" step=".01"
-                     readonly="readonly"/>
+                     readonly="readonly" class="item-form-input"/>
             </td>
           </tr>
           <tr>
-            <td class="item-form-table-btn">
-              <input type="submit" value="Update"/>
+            <td class="item-form-table-btn" colspan="2">
+              <input type="submit" value="Update" class="item-form-btn"/>
             </td>
           </tr>
         </table>
       </form>
 
       <form action="#" th:action="@{/rentals/close}" th:method="post"
-            class="update-item-form" th:if="${rental.endMileage == 0}">
+            class="item-form" th:if="${rental.endMileage == 0}">
         <input type="hidden" th:value="${rental.id}" name="id"/>
         <table class="item-form-table">
           <tr>
             <td class="item-form-table-lbl">End mileage</td>
             <td class="item-form-table-value">
               <input type="number" th:min="${rental.startMileage}" step=".01"
-                     th:value="${rental.startMileage}" name="endMileage"/>
+                     th:value="${rental.startMileage}" name="endMileage" class="item-form-input"/>
             </td>
           </tr>
           <tr>
             <td class="item-form-table-btn">
-              <input type="submit" value="Close rental"/>
+              <input type="submit" value="Close rental" class="item-form-btn"/>
             </td>
           </tr>
         </table>

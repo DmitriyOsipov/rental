@@ -6,11 +6,12 @@
 <div class="grid-container">
   <p th:include="top-bot-menu-part::tmb-part"></p>
   <section class="mainSect">
-    <div class="search-div">
-      <h1 class="search header" th:text="|Search contacts by ${searchParam}"></h1>
-      <form action="#" th:action="|/contacts/by${searchParam}" method="get" class="search-form">
-        <input type="text" th:id="${searchParam}" th:name="${searchParam}" class="search-form-el"/>
-        <input type="submit" class="search-form-submit" value="Search"/>
+    <div class="item-form-div">
+      <h1 class="section-title" th:text="|Search contacts by ${searchParam}"></h1>
+      <form action="#" th:action="|/contacts/by${searchParam}" method="get" class="item-form">
+        <input type="text" th:id="${searchParam}" th:name="${searchParam}" class="item-form-input"
+               th:placeholder="|Input ${searchParam} value here|"/>
+        <input type="submit" value="Search" class="item-form-btn"/>
       </form>
     </div>
   </section>

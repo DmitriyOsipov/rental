@@ -6,36 +6,37 @@
 <div class="grid-container">
   <p th:include="top-bot-menu-part::tmb-part"></p>
   <section class="mainSect">
-    <div>
-      <form action="#" th:action="@{/cars/new}" th:object="${car}" th:method="post" class="new-item-form">
+    <div class="item-form-div">
+      <h1 class="section-title">New car creation</h1>
+      <form action="#" th:action="@{/cars/new}" th:object="${car}" th:method="post" class="item-form">
         <input type="hidden" th:field="*{id}" value="0" name="id"/>
         <table class="item-form-table">
           <tr>
             <td class="item-form-table-lbl">Car type</td>
             <td class="item-form-table-value">
-              <input type="text" th:field="*{type}" name="type"/>
+              <input type="text" th:field="*{type}" name="type" class="item-form-input"/>
             </td>
           </tr>
           <tr>
             <td class="item-form-table-lbl">Car mileage</td>
             <td class="item-form-table-value">
-              <input type="number" min="0" th:field="*{mileage}" name="mileage"/>
+              <input type="number" min="0" th:field="*{mileage}" name="mileage" class="item-form-input"/>
             </td>
           </tr>
           <tr>
             <td class="item-form-table-lbl">Last maintenance</td>
             <td class="item-form-table-value">
-              <input type="number" min="0" th:field="*{lastMaintenance}" name="lastMaintenance"/>
+              <input type="number" min="0" th:field="*{lastMaintenance}" name="lastMaintenance" class="item-form-input"/>
             </td>
           </tr>
           <tr>
-            <td class="item-form-table-btn">
-              <input type="submit" value="Submit" />
+            <td class="item-form-table-btn" colspan="2">
+              <input type="submit" value="Submit" class="item-form-btn"/>
             </td>
           </tr>
           <tr>
-            <td class="item-form-table-btn">
-              <input type="reset" value="Reset" />
+            <td class="item-form-table-btn" colspan="2">
+              <input type="reset" value="Reset" class="item-form-btn"/>
             </td>
           </tr>
         </table>
