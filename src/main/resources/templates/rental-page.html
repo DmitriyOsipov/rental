@@ -44,14 +44,14 @@
           <tr>
             <td class="item-form-table-lbl">Start mileage</td>
             <td class="item-form-table-value">
-              <input type="number" th:value="${rental.startMileage}" step=".01"
+              <input type="number" th:value="${rental.startMileage}"
                      readonly="readonly" class="item-form-input"/>
             </td>
           </tr>
           <tr>
             <td class="item-form-table-lbl">End mileage</td>
             <td class="item-form-table-value">
-              <input type="number" th:value="${rental.endMileage}" step=".01" readonly="readonly"
+              <input type="number" th:value="${rental.endMileage}" readonly="readonly"
                      class="item-form-input"/>
             </td>
           </tr>
@@ -77,12 +77,12 @@
           <tr>
             <td class="item-form-table-lbl">End mileage</td>
             <td class="item-form-table-value">
-              <input type="number" th:min="${rental.startMileage}" step=".01"
+              <input type="number" th:min="${rental.startMileage}"
                      th:value="${rental.startMileage}" name="endMileage" class="item-form-input"/>
             </td>
           </tr>
           <tr>
-            <td class="item-form-table-btn">
+            <td class="item-form-table-btn" colspan="2">
               <input type="submit" value="Close rental" class="item-form-btn"/>
             </td>
           </tr>

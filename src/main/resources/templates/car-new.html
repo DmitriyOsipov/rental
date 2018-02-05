@@ -8,7 +8,8 @@
   <section class="mainSect">
     <div class="item-form-div">
       <h1 class="section-title">New car creation</h1>
-      <form action="#" th:action="@{/cars/new}" th:object="${car}" th:method="post" class="item-form">
+      <form action="#" th:action="@{/cars/new}" th:object="${car}" th:method="post"
+            class="item-form">
         <input type="hidden" th:field="*{id}" value="0" name="id"/>
         <table class="item-form-table">
           <tr>
@@ -20,13 +21,15 @@
           <tr>
             <td class="item-form-table-lbl">Car mileage</td>
             <td class="item-form-table-value">
-              <input type="number" min="0" th:field="*{mileage}" name="mileage" class="item-form-input"/>
+              <input type="number" min="0" th:field="*{mileage}" name="mileage"
+                     class="item-form-input"/>
             </td>
           </tr>
           <tr>
             <td class="item-form-table-lbl">Last maintenance</td>
             <td class="item-form-table-value">
-              <input type="number" min="0" th:field="*{lastMaintenance}" name="lastMaintenance" class="item-form-input"/>
+              <input type="number" min="0" th:field="*{lastMaintenance}" step="50000"
+                     name="lastMaintenance" class="item-form-input"/>
             </td>
           </tr>
           <tr>
